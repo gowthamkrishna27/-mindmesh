@@ -1,0 +1,962 @@
+[
+  {
+    "id": "Q-D01-01",
+    "primary_concept_id": "D01",
+    "learning_objective_id": "LO-D01-1",
+    "question_family": "recognition",
+    "difficulty": 1,
+    "expected_time_s": 20,
+    "prompt": "Which tier in the ANSI/SPARC 3-tier DBMS architecture defines how data is physically stored on storage hardware?",
+    "explanation": "The internal (physical) schema level describes the physical storage structure, access paths, and data compression techniques.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d01-a",
+    "hints": [
+      {"hint_level": 1, "content": "Think about the level closest to disk hardware and index structures."},
+      {"hint_level": 2, "content": "The 3 levels are external (views), conceptual (logical schema), and internal (physical)."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Internal (physical) level", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Conceptual (logical) level", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "CONFUSE_CONCEPTUAL_PHYSICAL", "misconception_text": "Confusing the logical community database design with physical hardware storage."},
+      {"option_key": "C", "text": "External (view) level", "is_correct": false, "maps_to_concept_id": "D01", "misconception_code": "CONFUSE_VIEW_STORAGE", "misconception_text": "Believing external user views dictate physical disk representation."},
+      {"option_key": "D", "text": "Application presentation level", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D01-02",
+    "primary_concept_id": "D01",
+    "learning_objective_id": "LO-D01-2",
+    "question_family": "interpretation",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "A database administrator changes index structures and rebuilds table storage across RAID disks without altering application queries or logical schemas. Which property is demonstrated?",
+    "explanation": "Physical data independence is the capacity to change internal physical schemas without requiring changes to conceptual or external schemas.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d01-b",
+    "hints": [
+      {"hint_level": 1, "content": "Notice whether the change altered physical storage or logical entity attributes."},
+      {"hint_level": 2, "content": "Changes to indexes and disk blocks without touching the schema exemplify physical data independence."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Physical data independence", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Logical data independence", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "CONFUSE_INDEPENDENCE_TYPE", "misconception_text": "Confusing logical schema modification with internal disk reorganization."},
+      {"option_key": "C", "text": "Atomicity guarantee", "is_correct": false, "maps_to_concept_id": "D01", "misconception_code": "CONFUSE_ACID_ABSTRACTION", "misconception_text": "Confusing transaction properties with architectural data independence."},
+      {"option_key": "D", "text": "Distributed transparency", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D01-03",
+    "primary_concept_id": "D01",
+    "learning_objective_id": "LO-D01-1",
+    "question_family": "error_analysis",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Which of the following is a primary limitation of conventional file-processing systems that a DBMS is designed to prevent?",
+    "explanation": "File processing systems lead to data redundancy, inconsistency, lack of centralized security, and difficulty in concurrent access control.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d01-c",
+    "hints": [
+      {"hint_level": 1, "content": "Consider what happens when multiple departments maintain independent copies of customer records."},
+      {"hint_level": 2, "content": "Redundant data in multiple files easily leads to inconsistent updates across systems."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Data redundancy leading to inconsistency across files", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Inability to store files on persistent magnetic storage", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "C", "text": "Inability of file systems to handle binary data", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "Requirement that all file structures use relational tables", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "ASSUME_FILE_IS_RELATIONAL", "misconception_text": "Assuming traditional file systems must use relational tables."}
+    ]
+  },
+  {
+    "id": "Q-D01-04",
+    "primary_concept_id": "D01",
+    "learning_objective_id": "LO-D01-2",
+    "question_family": "application",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "An organization migrates its database storage subsystem from spinning hard drives to high-speed NVMe flash storage. If application code and queries run unmodified, which architectural feature guarantees this?",
+    "explanation": "Physical data independence isolates applications from changes to storage hardware, access methods, and file placement.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d01-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "The change is strictly hardware and physical storage layer."},
+      {"hint_level": 2, "content": "Physical data independence shields higher layers from storage medium alterations."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Physical data independence", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Logical data independence", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "CONFUSE_INDEPENDENCE_TYPE", "misconception_text": "Confusing logical schema evolution with hardware storage migration."},
+      {"option_key": "C", "text": "Referential integrity enforcement", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_INTEGRITY_STORAGE", "misconception_text": "Attributing hardware abstraction to foreign key constraints."},
+      {"option_key": "D", "text": "View isolation protocol", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D01-05",
+    "primary_concept_id": "D01",
+    "learning_objective_id": "LO-D01-1",
+    "question_family": "interpretation",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "Adding a new attribute (e.g., 'middle_name') to a table without modifying existing queries that only select 'first_name' and 'last_name' is an example of which capability?",
+    "explanation": "Logical data independence allows the conceptual schema to be expanded without breaking existing external user views or queries.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d01-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "The schema entity definition was modified logically."},
+      {"hint_level": 2, "content": "Modifying logical schemas without breaking existing views demonstrates logical data independence."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Logical data independence", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Physical data independence", "is_correct": false, "maps_to_concept_id": "D01", "misconception_code": "CONFUSE_PHYSICAL_FOR_LOGICAL", "misconception_text": "Confusing logical attribute addition with physical storage changes."},
+      {"option_key": "C", "text": "Lossless decomposition", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "CONFUSE_DECOMPOSITION_INDEPENDENCE", "misconception_text": "Confusing normalization decomposition with logical data independence."},
+      {"option_key": "D", "text": "Data dictionary serialization", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D02-01",
+    "primary_concept_id": "D02",
+    "learning_objective_id": "LO-D02-1",
+    "question_family": "recognition",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "In the formal relational model, what is a mathematical relation?",
+    "explanation": "A relation r(R) on schema R(A1..An) is a mathematical set of tuples, where each tuple is an ordered list of values from the attribute domains. As a set, tuples are unordered and unique.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d02-a",
+    "hints": [
+      {"hint_level": 1, "content": "Recall whether a relation in formal set theory allows duplicate elements."},
+      {"hint_level": 2, "content": "A formal relation is a subset of the Cartesian product of attribute domains, hence a set of distinct tuples."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "A subset of the Cartesian product of the attribute domains", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "An ordered sequence of records with duplicate rows permitted by default", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "CONFUSE_SQL_BAG_WITH_RELATION", "misconception_text": "Confusing SQL multiset (bag) implementation with formal relational set theory."},
+      {"option_key": "C", "text": "A hierarchy of pointer records linked to a parent table", "is_correct": false, "maps_to_concept_id": "D01", "misconception_code": "CONFUSE_HIERARCHICAL_RELATIONAL", "misconception_text": "Confusing hierarchical database model with relational model."},
+      {"option_key": "D", "text": "A collection of file descriptors stored on disk", "is_correct": false, "maps_to_concept_id": "D01", "misconception_code": "CONFUSE_FILE_RELATION", "misconception_text": "Treating relations as file system artifacts."}
+    ]
+  },
+  {
+    "id": "Q-D02-02",
+    "primary_concept_id": "D02",
+    "learning_objective_id": "LO-D02-2",
+    "question_family": "interpretation",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "Which statement accurately distinguishes a relation schema from a relation state (instance)?",
+    "explanation": "A relation schema R(A1..An) defines the permanent structure and constraints, whereas the relation state r(R) is the current set of tuples at a specific point in time.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d02-b",
+    "hints": [
+      {"hint_level": 1, "content": "One changes frequently with INSERT/DELETE; the other defines column names and types."},
+      {"hint_level": 2, "content": "The schema is the structural definition; the state is the current data snapshot."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "The schema is the static structural definition; the state is the dynamic set of tuples at a given moment", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "The schema contains data values, while the state defines column data types", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "INVERT_SCHEMA_AND_STATE", "misconception_text": "Inverting schema and state definitions."},
+      {"option_key": "C", "text": "The schema changes on every INSERT transaction, while the state remains constant", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "MISUNDERSTAND_STATE_DYNAMICS", "misconception_text": "Assuming table schemas mutate on every data insert."},
+      {"option_key": "D", "text": "Schema and state are synonymous terms for the physical storage file", "is_correct": false, "maps_to_concept_id": "D01", "misconception_code": "CONFUSE_PHYSICAL_SCHEMA", "misconception_text": "Equating conceptual relational definitions with physical files."}
+    ]
+  },
+  {
+    "id": "Q-D02-03",
+    "primary_concept_id": "D02",
+    "learning_objective_id": "LO-D02-1",
+    "question_family": "error_analysis",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "An employee table has an attribute 'phone_numbers' containing comma-separated phone strings like '555-1234, 555-8901'. Why does this violate the fundamental relational model?",
+    "explanation": "The relational model requires attribute domains to be atomic (indivisible values). Multi-valued or composite values violate atomicity.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d02-c",
+    "hints": [
+      {"hint_level": 1, "content": "Look at the values stored in a single attribute cell."},
+      {"hint_level": 2, "content": "Relational attributes must contain atomic (scalar) values rather than lists or sets."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Attributes must be atomic; non-scalar repeating values violate the domain requirement", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Phone numbers cannot be represented as strings in relational systems", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "C", "text": "Every attribute must reference a foreign key in another table", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "OVEREXTEND_FOREIGN_KEY_REQUIREMENT", "misconception_text": "Assuming every table column must be a foreign key."},
+      {"option_key": "D", "text": "Relational tables cannot contain strings with commas", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D02-04",
+    "primary_concept_id": "D02",
+    "learning_objective_id": "LO-D02-2",
+    "question_family": "application",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Consider a relation with 3 attributes and domains D1={1,2}, D2={a}, D3={x,y}. What is the maximum number of distinct tuples this relation instance can contain?",
+    "explanation": "The maximum number of distinct tuples is the cardinality of the Cartesian product: |D1| * |D2| * |D3| = 2 * 1 * 2 = 4.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d02-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "A relation is a subset of D1 x D2 x D3."},
+      {"hint_level": 2, "content": "Multiply the sizes of the individual domains: 2 * 1 * 2."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "4", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "5", "is_correct": false, "maps_to_concept_id": null, "misconception_code": "ADD_INSTEAD_OF_MULTIPLY", "misconception_text": "Adding domain sizes instead of multiplying Cartesian dimensions."},
+      {"option_key": "C", "text": "8", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "1", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D02-05",
+    "primary_concept_id": "D02",
+    "learning_objective_id": "LO-D02-1",
+    "question_family": "interpretation",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "If relation R has 4 tuples and relation S has 3 tuples, what is the exact number of tuples in the Cartesian product R × S?",
+    "explanation": "The Cartesian product combines every tuple of R with every tuple of S, yielding |R| * |S| = 4 * 3 = 12 tuples.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d02-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "Each tuple in R pairs with every tuple in S."},
+      {"hint_level": 2, "content": "The number of tuples is the product of their cardinalities: 4 * 3."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "12", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "7", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "ADD_CARDINALITIES", "misconception_text": "Adding cardinalities instead of computing Cartesian product size."},
+      {"option_key": "C", "text": "4", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "CONFUSE_PRODUCT_WITH_JOIN", "misconception_text": "Confusing Cartesian product with inner join matching."},
+      {"option_key": "D", "text": "64", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D03-01",
+    "primary_concept_id": "D03",
+    "learning_objective_id": "LO-D03-1",
+    "question_family": "recognition",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "What defines a candidate key in a relation schema?",
+    "explanation": "A candidate key is a minimal superkey: a set of attributes that uniquely identifies tuples, with no proper subset being a superkey.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d03-a",
+    "hints": [
+      {"hint_level": 1, "content": "Focus on the property of minimality."},
+      {"hint_level": 2, "content": "A superkey that has no redundant attributes is a candidate key."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "A minimal superkey with no redundant attributes", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Any set of attributes that includes a foreign key", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_CANDIDATE_WITH_FOREIGN_KEY", "misconception_text": "Confusing candidate keys with foreign key references."},
+      {"option_key": "C", "text": "A superkey containing all attributes of the relation", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "EQUATE_CANDIDATE_KEY_WITH_SUPERKEY", "misconception_text": "Failing to require minimality for candidate keys."},
+      {"option_key": "D", "text": "An attribute that allows NULL values across tuples", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "BELIEVE_KEY_CAN_BE_NULL", "misconception_text": "Believing key attributes can be null."}
+    ]
+  },
+  {
+    "id": "Q-D03-02",
+    "primary_concept_id": "D03",
+    "learning_objective_id": "LO-D03-2",
+    "question_family": "application",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Relation R(A, B, C, D) has functional dependencies F = {A -> B, B -> C, C -> D}. What is the unique candidate key for R?",
+    "explanation": "A+ = {A, B, C, D}, determining all attributes. Neither B, C, nor D can determine A because A never appears on the right side of any dependency.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d03-b",
+    "hints": [
+      {"hint_level": 1, "content": "Which attribute never appears on the right-hand side of any dependency in F?"},
+      {"hint_level": 2, "content": "A must be in the key because nothing determines A. Compute the closure of {A}."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "{A}", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "{B}", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "INCOMPLETE_CLOSURE", "misconception_text": "Assuming B can determine A in closure calculation."},
+      {"option_key": "C", "text": "{A, B}", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "NON_MINIMAL_SUPERKEY", "misconception_text": "Adding extraneous attributes to a candidate key."},
+      {"option_key": "D", "text": "{D}", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "INVERTED_DEPENDENCY", "misconception_text": "Inverting dependency direction when determining keys."}
+    ]
+  },
+  {
+    "id": "Q-D03-03",
+    "primary_concept_id": "D03",
+    "learning_objective_id": "LO-D03-1",
+    "question_family": "error_analysis",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "If {SSN} is a candidate key for Employee(SSN, Name, Email), why is {SSN, Name} classified as a superkey but NOT a candidate key?",
+    "explanation": "{SSN, Name} uniquely identifies tuples (superkey), but removing Name leaves {SSN} which still uniquely identifies tuples. Hence it violates the minimality condition.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d03-c",
+    "hints": [
+      {"hint_level": 1, "content": "Test whether removing 'Name' destroys uniqueness."},
+      {"hint_level": 2, "content": "A candidate key cannot contain any proper subset that is also a superkey."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "It contains a proper subset {SSN} that uniquely identifies tuples, violating minimality", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "It cannot uniquely identify tuples in the Employee relation", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "DENY_SUPERKEY_UNIQUENESS", "misconception_text": "Failing to recognize that supersets of candidate keys preserve uniqueness."},
+      {"option_key": "C", "text": "Superkeys cannot contain string attributes like Name", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "Name is a foreign key to an external department table", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_NONKEY_WITH_FK", "misconception_text": "Treating arbitrary non-key attributes as foreign keys."}
+    ]
+  },
+  {
+    "id": "Q-D03-04",
+    "primary_concept_id": "D03",
+    "learning_objective_id": "LO-D03-1",
+    "question_family": "interpretation",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "A relation has two candidate keys: {Student_ID} and {Email}. If the designer designates {Student_ID} as the Primary Key, what is {Email} called?",
+    "explanation": "Candidate keys not chosen as the primary key are known as alternate keys (or secondary unique keys).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d03-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "Both are candidate keys; one is chosen as primary."},
+      {"hint_level": 2, "content": "The unselected candidate key is an alternate key."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "An alternate key", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "A foreign key", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_ALTERNATE_WITH_FOREIGN_KEY", "misconception_text": "Assuming unselected candidate keys become foreign keys."},
+      {"option_key": "C", "text": "A non-prime attribute", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "CONFUSE_PRIME_NONPRIME", "misconception_text": "Classifying attributes that belong to candidate keys as non-prime."},
+      {"option_key": "D", "text": "A composite surrogate key", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D03-05",
+    "primary_concept_id": "D03",
+    "learning_objective_id": "LO-D03-2",
+    "question_family": "error_analysis",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "In relation R(A, B, C) where {A} -> {B} and {B} -> {C}, a developer claims that {A, C} is a candidate key. What is the fundamental error in this claim?",
+    "explanation": "{A}+ = {A, B, C}, so {A} alone determines all attributes. Therefore {A, C} contains the extraneous attribute C and is a superkey, not a minimal candidate key.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d03-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "Compute the closure of {A} alone."},
+      {"hint_level": 2, "content": "Because {A} is already a key, adding C creates a non-minimal superkey."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Attribute C is extraneous because {A} alone determines all attributes", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "{A, C} does not uniquely identify tuples in R", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "DENY_SUPERKEY_UNIQUENESS", "misconception_text": "Failing to see that {A, C} does identify tuples uniquely."},
+      {"option_key": "C", "text": "Only single attributes can ever be candidate keys", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "DENY_COMPOSITE_KEYS", "misconception_text": "Believing composite candidate keys are forbidden in relational models."},
+      {"option_key": "D", "text": "C cannot appear in any key because it appears on the right side of an FD", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "OVERGENERALIZE_RIGHT_SIDE_RULE", "misconception_text": "Misapplying the right-side heuristic to composite superkeys."}
+    ]
+  },
+  {
+    "id": "Q-D04-01",
+    "primary_concept_id": "D04",
+    "learning_objective_id": "LO-D04-1",
+    "question_family": "recognition",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "What does the Entity Integrity constraint state in the relational model?",
+    "explanation": "Entity integrity requires that no primary key attribute value can be NULL in any tuple of a relation.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d04-a",
+    "hints": [
+      {"hint_level": 1, "content": "Think about whether a primary key value can be unknown or absent."},
+      {"hint_level": 2, "content": "Primary key attributes must never be NULL."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "No primary key value may contain NULL", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Foreign keys can never be NULL under any condition", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_ENTITY_WITH_REFERENTIAL", "misconception_text": "Confusing entity integrity with referential integrity and claiming FKs cannot be NULL."},
+      {"option_key": "C", "text": "Every table must have at least two candidate keys", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "CONFUSE_KEY_QUANTITY", "misconception_text": "Fabricating rules regarding the required number of candidate keys."},
+      {"option_key": "D", "text": "Tuples in child tables cannot be deleted", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "MISUNDERSTAND_CASCADE", "misconception_text": "Confusing delete restrictions with entity integrity."}
+    ]
+  },
+  {
+    "id": "Q-D04-02",
+    "primary_concept_id": "D04",
+    "learning_objective_id": "LO-D04-1",
+    "question_family": "interpretation",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Relation Orders has foreign key customer_id referencing Customers(customer_id). Which value in Orders.customer_id satisfies Referential Integrity?",
+    "explanation": "A foreign key value must either match an existing primary key value in the referenced relation or be NULL (if NULL is permitted).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d04-b",
+    "hints": [
+      {"hint_level": 1, "content": "Consider both matching values and the possibility of unassigned references."},
+      {"hint_level": 2, "content": "A foreign key value must match an existing primary key value in the referenced table, or be NULL."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "A value that matches an existing Customers.customer_id, or NULL", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Any integer, even if it does not exist in Customers", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "VIOLATE_REFERENTIAL_INTEGRITY", "misconception_text": "Allowing orphan foreign key values that reference non-existent parent records."},
+      {"option_key": "C", "text": "Only non-null values that match Customers.customer_id (NULL is strictly forbidden in all foreign keys)", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "FORBID_NULL_FOREIGN_KEY", "misconception_text": "Believing foreign keys can never hold NULL values unless NOT NULL is specified."},
+      {"option_key": "D", "text": "A value matching any column in the Orders table", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "CONFUSE_SELF_COLUMN_MATCH", "misconception_text": "Confusing foreign keys with internal column matching."}
+    ]
+  },
+  {
+    "id": "Q-D04-03",
+    "primary_concept_id": "D04",
+    "learning_objective_id": "LO-D04-2",
+    "question_family": "application",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Table Orders references Customers with ON DELETE CASCADE. What happens when a row in Customers with customer_id=10 is deleted?",
+    "explanation": "ON DELETE CASCADE automatically deletes all rows in the child table (Orders) where customer_id=10.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d04-c",
+    "hints": [
+      {"hint_level": 1, "content": "Cascade means the delete operation propagates from parent to children."},
+      {"hint_level": 2, "content": "All corresponding order records referencing customer_id=10 are automatically deleted."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "All Orders rows with customer_id=10 are automatically deleted", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "The deletion is aborted and an error is raised", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_CASCADE_WITH_RESTRICT", "misconception_text": "Confusing ON DELETE CASCADE with ON DELETE RESTRICT."},
+      {"option_key": "C", "text": "Orders rows have their customer_id updated to NULL", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_CASCADE_WITH_SET_NULL", "misconception_text": "Confusing CASCADE with SET NULL."},
+      {"option_key": "D", "text": "The entire Orders table is truncated", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D04-04",
+    "primary_concept_id": "D04",
+    "learning_objective_id": "LO-D04-2",
+    "question_family": "error_analysis",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "An administrator tries to delete Department 5 from Departments, but receives: 'ORA-02292: integrity constraint violated - child record found'. What referential action was configured on the foreign key?",
+    "explanation": "ON DELETE RESTRICT (or NO ACTION) prevents the deletion of a parent record if matching child records exist.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d04-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "The system blocked the delete because children still exist."},
+      {"hint_level": 2, "content": "RESTRICT / NO ACTION forbids deleting parent tuples when child references exist."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "ON DELETE RESTRICT or NO ACTION", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "ON DELETE CASCADE", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_RESTRICT_WITH_CASCADE", "misconception_text": "Believing CASCADE causes an integrity violation error instead of cascading."},
+      {"option_key": "C", "text": "ON DELETE SET DEFAULT", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "DEFERRABLE INITIALLY DEFERRED", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D04-05",
+    "primary_concept_id": "D04",
+    "learning_objective_id": "LO-D04-1",
+    "question_family": "interpretation",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "In an Enrollment table, the foreign key student_id is defined as 'NOT NULL REFERENCES Students(id) ON DELETE SET NULL'. What problem occurs if a student is deleted?",
+    "explanation": "ON DELETE SET NULL attempts to write NULL to student_id, which directly conflicts with the column's NOT NULL constraint, causing the operation to fail.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d04-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "Notice the contradiction between NOT NULL and SET NULL."},
+      {"hint_level": 2, "content": "Attempting to set NULL on a NOT NULL column violates domain integrity."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Setting student_id to NULL violates the column's NOT NULL constraint, causing an error", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "The NOT NULL constraint is silently removed by the DBMS", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "ASSUME_SILENT_CONSTRAINT_OVERRIDE", "misconception_text": "Assuming database engines silently remove constraints."},
+      {"option_key": "C", "text": "The child record is permanently converted into a parent record", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "No error occurs because SET NULL overrides NOT NULL in SQL standards", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "BELIEVE_SET_NULL_OVERRIDES_NOT_NULL", "misconception_text": "Believing referential actions override explicit column domain constraints."}
+    ]
+  },
+  {
+    "id": "Q-D08-01",
+    "primary_concept_id": "D08",
+    "learning_objective_id": "LO-D08-1",
+    "question_family": "recognition",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "What is the critical semantic difference between the WHERE clause and the HAVING clause in SQL?",
+    "explanation": "WHERE filters individual candidate rows before grouping occurs; HAVING filters aggregated groups after GROUP BY.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d08-a",
+    "hints": [
+      {"hint_level": 1, "content": "Consider query execution order: grouping happens between them."},
+      {"hint_level": 2, "content": "WHERE filters rows before GROUP BY; HAVING filters groups created by GROUP BY."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "WHERE filters rows before grouping; HAVING filters aggregated groups after grouping", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "WHERE can use aggregate functions like AVG(); HAVING cannot", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "INVERT_AGGREGATE_FILTERS", "misconception_text": "Inverting WHERE and HAVING aggregate capabilities."},
+      {"option_key": "C", "text": "WHERE is evaluated after ORDER BY; HAVING is evaluated before FROM", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "CONFUSE_SQL_EXECUTION_ORDER", "misconception_text": "Confusing the logical order of SQL query processing."},
+      {"option_key": "D", "text": "WHERE only works on numeric columns, while HAVING works on string columns", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D08-02",
+    "primary_concept_id": "D08",
+    "learning_objective_id": "LO-D08-2",
+    "question_family": "application",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Given Employees(emp_id, dept_id, salary), which query correctly finds departments with an average salary greater than 50000?",
+    "explanation": "Grouping by dept_id followed by HAVING AVG(salary) > 50000 filters aggregated groups.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d08-b",
+    "hints": [
+      {"hint_level": 1, "content": "You need to aggregate salary with AVG and filter on that aggregated value."},
+      {"hint_level": 2, "content": "Filtering on AVG(salary) must appear in the HAVING clause, not WHERE."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "SELECT dept_id, AVG(salary) FROM Employees GROUP BY dept_id HAVING AVG(salary) > 50000;", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "SELECT dept_id, AVG(salary) FROM Employees WHERE AVG(salary) > 50000 GROUP BY dept_id;", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "AGGREGATE_IN_WHERE_CLAUSE", "misconception_text": "Attempting to filter with an aggregate function inside a WHERE clause."},
+      {"option_key": "C", "text": "SELECT dept_id, AVG(salary) FROM Employees WHERE salary > 50000;", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "ROW_FILTER_INSTEAD_OF_GROUP", "misconception_text": "Filtering individual row salaries instead of department averages."},
+      {"option_key": "D", "text": "SELECT dept_id FROM Employees HAVING salary > 50000;", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "HAVING_WITHOUT_GROUP_BY", "misconception_text": "Using HAVING on non-aggregated row attributes without grouping."}
+    ]
+  },
+  {
+    "id": "Q-D08-03",
+    "primary_concept_id": "D08",
+    "learning_objective_id": "LO-D08-2",
+    "question_family": "error_analysis",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Why does the query 'SELECT department, COUNT(*) FROM Employees WHERE COUNT(*) > 5 GROUP BY department;' fail with a syntax error?",
+    "explanation": "WHERE filters individual rows before groups are formed, so aggregate functions like COUNT(*) are illegal in WHERE.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d08-c",
+    "hints": [
+      {"hint_level": 1, "content": "Can COUNT(*) be evaluated for an individual employee row before grouping?"},
+      {"hint_level": 2, "content": "Aggregate calculations only exist after grouping; they belong in HAVING."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Aggregate functions cannot appear in the WHERE clause because rows have not yet been grouped", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "COUNT(*) can only be used with numbers, not department names", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "C", "text": "GROUP BY must always precede the FROM clause", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "CONFUSE_SQL_SYNTAX_ORDER", "misconception_text": "Misunderstanding standard SQL clause sequence."},
+      {"option_key": "D", "text": "Employees must have an explicit primary key defined to use COUNT(*)", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "TIE_AGGREGATE_TO_PRIMARY_KEY", "misconception_text": "Believing aggregation requires primary keys."}
+    ]
+  },
+  {
+    "id": "Q-D08-04",
+    "primary_concept_id": "D08",
+    "learning_objective_id": "LO-D08-1",
+    "question_family": "interpretation",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "In SQL, why does the condition 'WHERE bonus = NULL' evaluate to UNKNOWN and return zero rows, even for employees whose bonus is NULL?",
+    "explanation": "In SQL's three-valued logic, NULL represents an unknown value. Comparisons with '=' evaluate to UNKNOWN; tests for nullness must use 'IS NULL'.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d08-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "Think about SQL three-valued logic: TRUE, FALSE, UNKNOWN."},
+      {"hint_level": 2, "content": "Comparing anything with NULL using = produces UNKNOWN. Use IS NULL instead."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Comparisons with '=' against NULL produce UNKNOWN; 'IS NULL' must be used", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "NULL values are converted to 0 automatically in WHERE clauses", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "ASSUME_NULL_IS_ZERO", "misconception_text": "Assuming NULL is equivalent to integer 0."},
+      {"option_key": "C", "text": "The WHERE clause is skipped if a column has NULL values", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "Only primary key columns support NULL comparisons", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_ENTITY_NULL_RULES", "misconception_text": "Confusing SQL null checks with primary key non-null constraints."}
+    ]
+  },
+  {
+    "id": "Q-D08-05",
+    "primary_concept_id": "D08",
+    "learning_objective_id": "LO-D08-2",
+    "question_family": "application",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "What will be the result of 'SELECT COUNT(comm) FROM Emp;' if the table has 5 rows with comm values: 100, 200, NULL, 300, NULL?",
+    "explanation": "COUNT(column) ignores NULL values and counts only rows where the specified attribute is non-null (100, 200, 300 -> 3 rows).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d08-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "Does COUNT(column_name) include NULL entries?"},
+      {"hint_level": 2, "content": "COUNT(*) counts all rows; COUNT(column) counts only non-null values."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "3", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "5", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "CONFUSE_COUNT_COL_WITH_COUNT_STAR", "misconception_text": "Assuming COUNT(column) behaves like COUNT(*) and counts nulls."},
+      {"option_key": "C", "text": "NULL", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "BELIEVE_AGGREGATE_RETURNS_NULL_ON_PRESENCE", "misconception_text": "Believing any presence of null causes COUNT to return null."},
+      {"option_key": "D", "text": "0", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D09-01",
+    "primary_concept_id": "D09",
+    "learning_objective_id": "LO-D09-1",
+    "question_family": "recognition",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "In SQL, how does a LEFT OUTER JOIN behave when a row in the left table has no matching row in the right table?",
+    "explanation": "LEFT OUTER JOIN returns all rows from the left table; unmatched rows are padded with NULL values for all right table columns.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d09-a",
+    "hints": [
+      {"hint_level": 1, "content": "Left outer join guarantees every row from the left table appears in the output."},
+      {"hint_level": 2, "content": "When there is no right match, columns from the right table are padded with NULL."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "The left row is included, with NULL values for all right table columns", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "The left row is excluded from the result entirely", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "CONFUSE_LEFT_WITH_INNER_JOIN", "misconception_text": "Confusing LEFT OUTER JOIN with INNER JOIN behavior."},
+      {"option_key": "C", "text": "The query fails with a referential integrity violation", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_JOIN_WITH_FK_CONSTRAINT", "misconception_text": "Confusing outer join query execution with foreign key database constraints."},
+      {"option_key": "D", "text": "The left row is duplicated for every row in the right table", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "CONFUSE_OUTER_WITH_CROSS_JOIN", "misconception_text": "Confusing left outer joins with cross joins."}
+    ]
+  },
+  {
+    "id": "Q-D09-02",
+    "primary_concept_id": "D09",
+    "learning_objective_id": "LO-D09-2",
+    "question_family": "application",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Table A has 4 rows; Table B has 3 rows. Two rows in A match two rows in B; other rows do not match. How many rows will 'SELECT * FROM A INNER JOIN B ON A.id = B.a_id;' return?",
+    "explanation": "INNER JOIN returns only rows that satisfy the join condition. Since exactly two rows in A match two rows in B (1-to-1), exactly 2 rows are returned.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d09-b",
+    "hints": [
+      {"hint_level": 1, "content": "INNER JOIN retains only tuples satisfying the equality predicate."},
+      {"hint_level": 2, "content": "Only the 2 matching pairs are included in the result."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "2", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "4", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "CONFUSE_INNER_WITH_LEFT_COUNT", "misconception_text": "Giving the row count of a LEFT JOIN instead of an INNER JOIN."},
+      {"option_key": "C", "text": "7", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "ADD_TABLE_SIZES", "misconception_text": "Adding table cardinalities together."},
+      {"option_key": "D", "text": "12", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "COMPUTE_CARTESIAN_PRODUCT", "misconception_text": "Computing the Cartesian product size instead of the inner join size."}
+    ]
+  },
+  {
+    "id": "Q-D09-03",
+    "primary_concept_id": "D09",
+    "learning_objective_id": "LO-D09-2",
+    "question_family": "error_analysis",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "A query executes: 'SELECT * FROM Customers c LEFT JOIN Orders o ON c.id = o.customer_id WHERE o.status = 'shipped';' Why are customers with NO orders excluded from the output?",
+    "explanation": "For customers without orders, o.status is NULL. The WHERE clause condition 'o.status = shipped' evaluates to UNKNOWN for NULLs and filters out those null-padded rows, turning the LEFT JOIN into an INNER JOIN.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d09-c",
+    "hints": [
+      {"hint_level": 1, "content": "What value does o.status have for customers who have no orders?"},
+      {"hint_level": 2, "content": "Null-padded rows have o.status = NULL. The WHERE clause filters out NULLs, converting the query into an inner join."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "The WHERE clause filters out rows where o.status is NULL, unintentionally converting the LEFT JOIN into an INNER JOIN", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "LEFT JOIN cannot be used with WHERE clauses in SQL", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "BELIEVE_WHERE_FORBIDDEN_WITH_JOIN", "misconception_text": "Believing WHERE clauses are illegal with outer joins."},
+      {"option_key": "C", "text": "Customers without orders cause a syntax error during parsing", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "The ON clause takes precedence and duplicates all customers", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D09-04",
+    "primary_concept_id": "D09",
+    "learning_objective_id": "LO-D09-1",
+    "question_family": "interpretation",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "What does a FULL OUTER JOIN between relations R and S return?",
+    "explanation": "FULL OUTER JOIN combines the results of both LEFT and RIGHT outer joins, retaining matching rows as well as unmatched rows from both R and S (padded with NULLs).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d09-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "Full means neither left nor right unmatched tuples are discarded."},
+      {"hint_level": 2, "content": "It preserves matched rows plus unmatched rows from both sides padded with NULLs."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Matched rows plus unmatched rows from both relations, padded with NULLs where no match exists", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Only rows that have identical values in all columns across both tables", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "CONFUSE_FULL_WITH_NATURAL_INTERSECT", "misconception_text": "Confusing full outer join with set intersection."},
+      {"option_key": "C", "text": "The Cartesian product with no predicate evaluation", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "CONFUSE_FULL_WITH_CROSS_JOIN", "misconception_text": "Confusing full outer join with cross join."},
+      {"option_key": "D", "text": "Only unmatched rows from both relations", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D09-05",
+    "primary_concept_id": "D09",
+    "learning_objective_id": "LO-D09-2",
+    "question_family": "application",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "Table R has 5 rows and Table S has 6 rows. If the query 'SELECT * FROM R, S;' is executed without a WHERE clause, how many rows are returned?",
+    "explanation": "A comma join without a WHERE clause is a CROSS JOIN (Cartesian product), returning |R| * |S| = 5 * 6 = 30 rows.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d09-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "Listing two tables in FROM without a join condition produces a Cartesian product."},
+      {"hint_level": 2, "content": "Multiply the row counts: 5 * 6."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "30", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "11", "is_correct": false, "maps_to_concept_id": "D08", "misconception_code": "ADD_ROWS_INSTEAD_OF_PRODUCT", "misconception_text": "Adding row counts instead of computing Cartesian product size."},
+      {"option_key": "C", "text": "0", "is_correct": false, "maps_to_concept_id": "D09", "misconception_code": "BELIEVE_UNPREDICATED_JOIN_IS_EMPTY", "misconception_text": "Believing unpredicated joins return zero rows."},
+      {"option_key": "D", "text": "6", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D12-01",
+    "primary_concept_id": "D12",
+    "learning_objective_id": "LO-D12-1",
+    "question_family": "recognition",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "What does the functional dependency X -> Y formally mean on relation schema R?",
+    "explanation": "X -> Y means that whenever two tuples agree on their attribute values for X, they must also agree on their attribute values for Y (t1[X] = t2[X] implies t1[Y] = t2[Y]).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d12-a",
+    "hints": [
+      {"hint_level": 1, "content": "X uniquely determines Y."},
+      {"hint_level": 2, "content": "If two tuples have the same X values, they must have the same Y values."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Whenever two tuples have identical values for X, they must have identical values for Y", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Whenever two tuples have identical values for Y, they must have identical values for X", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "INVERT_FUNCTIONAL_DEPENDENCY", "misconception_text": "Reversing the determinant and dependent attribute sets in functional dependency."},
+      {"option_key": "C", "text": "X and Y must be foreign keys to another relation", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_FD_WITH_FOREIGN_KEY", "misconception_text": "Confusing functional dependencies with foreign key relationships."},
+      {"option_key": "D", "text": "X must contain fewer attributes than Y", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D12-02",
+    "primary_concept_id": "D12",
+    "learning_objective_id": "LO-D12-2",
+    "question_family": "application",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Given relation R(A, B, C, D, E) and F = {A -> B, B -> C, CD -> E}. What is the attribute closure {A, D}+?",
+    "explanation": "Start with {A, D}. From A->B, add B -> {A, B, D}. From B->C, add C -> {A, B, C, D}. From CD->E, since C,D are in closure, add E -> {A, B, C, D, E}.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d12-b",
+    "hints": [
+      {"hint_level": 1, "content": "Start with {A, D} and iteratively apply dependencies whose left-hand side is in the set."},
+      {"hint_level": 2, "content": "A->B gives B; B->C gives C; now both C and D are present, so CD->E adds E."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "{A, B, C, D, E}", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "{A, B, D}", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "PREMATURE_TERMINATION_CLOSURE", "misconception_text": "Stopping the closure calculation after only one transitive step."},
+      {"option_key": "C", "text": "{A, D, E}", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "MISAPPLY_COMPOSITE_LHS", "misconception_text": "Applying CD->E without including intermediate derived attribute C."},
+      {"option_key": "D", "text": "{A, D}", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "NO_CLOSURE_EXPANSION", "misconception_text": "Failing to apply any functional dependencies to the closure."}
+    ]
+  },
+  {
+    "id": "Q-D12-03",
+    "primary_concept_id": "D12",
+    "learning_objective_id": "LO-D12-1",
+    "question_family": "error_analysis",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "Which of the following is NOT a sound inference rule for functional dependencies?",
+    "explanation": "Decomposition applies only to the right side: if X -> YZ, then X -> Y and X -> Z. It is invalid to decompose the left side (if XY -> Z, it does NOT imply X -> Z).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d12-c",
+    "hints": [
+      {"hint_level": 1, "content": "Can you split the determinant (left-hand side) of a dependency?"},
+      {"hint_level": 2, "content": "If {Course, Student} -> Grade, does Course alone determine Grade? No."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "If XY -> Z, then X -> Z and Y -> Z", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "If X -> Y and Y -> Z, then X -> Z (Transitivity)", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "DENY_TRANSITIVITY", "misconception_text": "Denying valid transitivity rule."},
+      {"option_key": "C", "text": "If X -> Y, then XZ -> YZ (Augmentation)", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "DENY_AUGMENTATION", "misconception_text": "Denying valid augmentation rule."},
+      {"option_key": "D", "text": "If Y is a subset of X, then X -> Y (Reflexivity)", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "DENY_REFLEXIVITY", "misconception_text": "Denying valid reflexivity rule."}
+    ]
+  },
+  {
+    "id": "Q-D12-04",
+    "primary_concept_id": "D12",
+    "learning_objective_id": "LO-D12-1",
+    "question_family": "interpretation",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "If X -> Y holds and Y -> Z holds, Armstrong's Transitivity axiom concludes that X -> Z holds. Why?",
+    "explanation": "If t1[X]=t2[X], then t1[Y]=t2[Y] by X->Y. Since t1[Y]=t2[Y], t1[Z]=t2[Z] by Y->Z. Thus t1[X]=t2[X] implies t1[Z]=t2[Z].",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d12-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "Follow the chain of tuple equalities from X to Y and Y to Z."},
+      {"hint_level": 2, "content": "Any two tuples matching on X must match on Y, which in turn forces them to match on Z."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Tuples matching on X are forced to match on Y, which in turn forces them to match on Z", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "Z is always a candidate key for X", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "CONFUSE_TRANSITIVITY_WITH_KEY", "misconception_text": "Confusing transitive dependency with candidate key qualification."},
+      {"option_key": "C", "text": "Transitivity holds only when X, Y, and Z are all single attributes", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "D", "text": "X must be a foreign key pointing to Z", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_FD_WITH_FOREIGN_KEY", "misconception_text": "Confusing functional dependency with referential integrity constraints."}
+    ]
+  },
+  {
+    "id": "Q-D12-05",
+    "primary_concept_id": "D12",
+    "learning_objective_id": "LO-D12-2",
+    "question_family": "application",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "Relation R(A, B, C) has functional dependencies F = {A -> B, B -> C, C -> A}. How many distinct candidate keys exist for R?",
+    "explanation": "{A}+ = {A,B,C}, {B}+ = {A,B,C}, and {C}+ = {A,B,C}. Each single attribute determines all attributes, so {A}, {B}, and {C} are all candidate keys (3 total).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d12-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "Compute the closure of each individual attribute: {A}+, {B}+, {C}+."},
+      {"hint_level": 2, "content": "Since A->B, B->C, C->A form a cycle, every single attribute generates all of R."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "3 ({A}, {B}, and {C})", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "1 (only {A})", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "ASSUME_SINGLE_CANDIDATE_KEY", "misconception_text": "Assuming a relation can only have one candidate key."},
+      {"option_key": "C", "text": "0 (none because of cyclic dependencies)", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "BELIEVE_CYCLES_PREVENT_KEYS", "misconception_text": "Believing dependency cycles prevent candidate key existence."},
+      {"option_key": "D", "text": "6", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D13-01",
+    "primary_concept_id": "D13",
+    "learning_objective_id": "LO-D13-1",
+    "question_family": "recognition",
+    "difficulty": 2,
+    "expected_time_s": 30,
+    "prompt": "A relation is in Second Normal Form (2NF) if and only if it is in 1NF and what additional condition is met?",
+    "explanation": "2NF requires 1NF and no partial dependencies: no non-prime attribute may be functionally dependent on a proper subset of any candidate key.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d13-a",
+    "hints": [
+      {"hint_level": 1, "content": "2NF focuses on eliminating dependencies on part of a composite key."},
+      {"hint_level": 2, "content": "No non-prime attribute may depend on a proper subset of any candidate key (no partial dependency)."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Every non-prime attribute is fully functionally dependent on every candidate key (no partial dependencies)", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "There are no transitive dependencies between non-prime attributes", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "CONFUSE_2NF_WITH_3NF", "misconception_text": "Confusing 2NF partial dependency condition with 3NF transitive dependency condition."},
+      {"option_key": "C", "text": "Every determinant is a superkey (BCNF)", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "CONFUSE_2NF_WITH_BCNF", "misconception_text": "Confusing 2NF with BCNF requirement."},
+      {"option_key": "D", "text": "Every table has exactly two columns", "is_correct": false, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null}
+    ]
+  },
+  {
+    "id": "Q-D13-02",
+    "primary_concept_id": "D13",
+    "learning_objective_id": "LO-D13-1",
+    "question_family": "interpretation",
+    "difficulty": 3,
+    "expected_time_s": 45,
+    "prompt": "For a relation in 2NF to be in Third Normal Form (3NF), what must hold for every non-trivial functional dependency X -> Y?",
+    "explanation": "3NF allows X -> Y if and only if either X is a superkey OR Y is a prime attribute (part of some candidate key).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d13-b",
+    "hints": [
+      {"hint_level": 1, "content": "3NF provides a relaxation that BCNF does not have."},
+      {"hint_level": 2, "content": "Either X is a superkey, or Y is a prime attribute."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "Either X is a superkey, or Y is a prime attribute", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "X must be a superkey in all cases without exception", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "CONFUSE_3NF_WITH_BCNF", "misconception_text": "Stating the BCNF definition instead of the 3NF definition."},
+      {"option_key": "C", "text": "Y must always be a foreign key", "is_correct": false, "maps_to_concept_id": "D04", "misconception_code": "CONFUSE_NORMALIZATION_WITH_FK", "misconception_text": "Confusing normal forms with foreign key constraints."},
+      {"option_key": "D", "text": "X and Y must be disjoint sets of non-prime attributes", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "MISUNDERSTAND_3NF_CONDITIONS", "misconception_text": "Misunderstanding the 3NF relaxation clause."}
+    ]
+  },
+  {
+    "id": "Q-D13-03",
+    "primary_concept_id": "D13",
+    "learning_objective_id": "LO-D13-2",
+    "question_family": "error_analysis",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "Relation Emp_Dept(emp_id, emp_name, dept_id, dept_name) has primary key emp_id and FDs: emp_id -> dept_id, dept_id -> dept_name. Why does this violate 3NF?",
+    "explanation": "emp_id -> dept_name is a transitive dependency via dept_id (dept_id is not a superkey, and dept_name is not a prime attribute), violating 3NF.",
+    "review_status": "reviewed",
+    "use_for_diagnosis": true,
+    "use_for_retest": false,
+    "variant_group": "vg-d13-c",
+    "hints": [
+      {"hint_level": 1, "content": "Notice that dept_id determines dept_name, but dept_id is not a key for the employee table."},
+      {"hint_level": 2, "content": "A non-prime attribute determining another non-prime attribute creates a transitive dependency."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "dept_id -> dept_name is a transitive dependency where dept_id is not a superkey and dept_name is non-prime", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "The primary key emp_id contains too few attributes for 3NF", "is_correct": false, "maps_to_concept_id": "D03", "misconception_code": "BELIEVE_3NF_REQUIRES_COMPOSITE_KEYS", "misconception_text": "Believing 3NF requires composite keys."},
+      {"option_key": "C", "text": "dept_name violates 1NF because it is a string", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "CONFUSE_STRING_WITH_NON_ATOMIC", "misconception_text": "Confusing string data types with non-atomic domains."},
+      {"option_key": "D", "text": "It is in 3NF because emp_id determines all attributes", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "OVERLOOK_TRANSITIVE_DEPENDENCY", "misconception_text": "Overlooking transitive dependencies when superkey determines all attributes."}
+    ]
+  },
+  {
+    "id": "Q-D13-04",
+    "primary_concept_id": "D13",
+    "learning_objective_id": "LO-D13-2",
+    "question_family": "application",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "Relation Student_Course(student_id, course_id, student_name, grade) has candidate key {student_id, course_id} and dependency student_id -> student_name. How should it be decomposed into 2NF?",
+    "explanation": "student_id -> student_name is a partial dependency on the candidate key. Decompose into: Student(student_id, student_name) and Student_Course(student_id, course_id, grade).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d13-retest-1",
+    "hints": [
+      {"hint_level": 1, "content": "Separate the partial dependency (student_id -> student_name) into its own relation."},
+      {"hint_level": 2, "content": "Keep student_id in the original table to preserve foreign key linkage with grade."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "R1(student_id, student_name) and R2(student_id, course_id, grade)", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "R1(student_id, course_id) and R2(student_name, grade)", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "LOSSY_DECOMPOSITION", "misconception_text": "Creating a lossy decomposition where student_name and grade cannot be joined back."},
+      {"option_key": "C", "text": "R1(student_name, course_id) and R2(student_id, grade)", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "ARBITRARY_ATTRIBUTE_SPLIT", "misconception_text": "Splitting attributes arbitrarily without adhering to functional dependencies."},
+      {"option_key": "D", "text": "No decomposition is needed because all relations with grade are automatically in 2NF", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "DENY_PARTIAL_DEPENDENCY", "misconception_text": "Failing to recognize a partial dependency on a composite key."}
+    ]
+  },
+  {
+    "id": "Q-D13-05",
+    "primary_concept_id": "D13",
+    "learning_objective_id": "LO-D13-1",
+    "question_family": "interpretation",
+    "difficulty": 4,
+    "expected_time_s": 60,
+    "prompt": "When decomposing a relation R into R1 and R2, what formal condition guarantees that the decomposition is a Lossless-Join Decomposition?",
+    "explanation": "A decomposition of R into R1 and R2 is lossless if and only if R1 ∩ R2 -> R1 or R1 ∩ R2 -> R2 holds in F+ (the common attributes must form a superkey of at least one decomposed schema).",
+    "review_status": "reviewed",
+    "use_for_diagnosis": false,
+    "use_for_retest": true,
+    "variant_group": "vg-d13-retest-2",
+    "hints": [
+      {"hint_level": 1, "content": "What must the common attributes (R1 ∩ R2) determine?"},
+      {"hint_level": 2, "content": "The intersection R1 ∩ R2 must be a superkey of either R1 or R2."}
+    ],
+    "options": [
+      {"option_key": "A", "text": "The intersection R1 ∩ R2 must be a superkey of R1 or a superkey of R2", "is_correct": true, "maps_to_concept_id": null, "misconception_code": null, "misconception_text": null},
+      {"option_key": "B", "text": "R1 and R2 must have zero attributes in common (disjoint schemas)", "is_correct": false, "maps_to_concept_id": "D13", "misconception_code": "BELIEVE_DISJOINT_IS_LOSSLESS", "misconception_text": "Believing disjoint schemas produce a lossless join (Cartesian product instead)."},
+      {"option_key": "C", "text": "Both relations must contain exactly the same number of rows", "is_correct": false, "maps_to_concept_id": "D02", "misconception_code": "CONFUSE_ROW_COUNT_WITH_LOSSLESS", "misconception_text": "Confusing instance row counts with schema lossless properties."},
+      {"option_key": "D", "text": "All functional dependencies must be discarded after decomposition", "is_correct": false, "maps_to_concept_id": "D12", "misconception_code": "MISUNDERSTAND_DEPENDENCY_PRESERVATION", "misconception_text": "Misunderstanding dependency preservation."}
+    ]
+  }
+]

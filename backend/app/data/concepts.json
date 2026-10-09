@@ -1,0 +1,74 @@
+[
+  {
+    "id": "D01",
+    "name": "DBMS Basics",
+    "description": "Fundamental architecture, purpose, and advantages of database management systems over file processing systems.",
+    "learning_objective": "Understand DBMS architecture, data abstraction layers, and instance vs schema independence.",
+    "branch": "Foundation",
+    "prerequisites": [],
+    "resource_unavailable": false
+  },
+  {
+    "id": "D02",
+    "name": "Relational Model",
+    "description": "Structure of relational databases including relations, tuples, attributes, domains, and relational schema principles.",
+    "learning_objective": "Model real-world data as relations, understand relational constraints, and distinguish schemas from relation states.",
+    "branch": "Foundation",
+    "prerequisites": ["D01"],
+    "resource_unavailable": false
+  },
+  {
+    "id": "D03",
+    "name": "Keys",
+    "description": "Identification of candidate keys, primary keys, superkeys, and foreign keys across relational tables.",
+    "learning_objective": "Determine minimal superkeys, designate primary keys, and correctly identify foreign key relationships.",
+    "branch": "Design",
+    "prerequisites": ["D02"],
+    "resource_unavailable": false
+  },
+  {
+    "id": "D04",
+    "name": "Integrity Constraints",
+    "description": "Entity integrity, referential integrity, domain constraints, and check constraints.",
+    "learning_objective": "Enforce entity and referential integrity and predict system behavior under cascade, set null, and restrict operations.",
+    "branch": "Design",
+    "prerequisites": ["D02", "D03"],
+    "resource_unavailable": false
+  },
+  {
+    "id": "D08",
+    "name": "SQL Basics",
+    "description": "Core SQL DDL/DML, including SELECT projections, WHERE filtering, aggregation, and GROUP BY / HAVING clauses.",
+    "learning_objective": "Construct declarative SQL queries to retrieve, filter, and aggregate relational data correctly.",
+    "branch": "SQL",
+    "prerequisites": ["D02"],
+    "resource_unavailable": false
+  },
+  {
+    "id": "D09",
+    "name": "SQL Joins",
+    "description": "Multi-table relational queries using INNER JOIN, LEFT/RIGHT OUTER JOIN, FULL JOIN, and CROSS JOIN.",
+    "learning_objective": "Combine relations using appropriate join predicates while accounting for null-extension and join cardinality.",
+    "branch": "SQL",
+    "prerequisites": ["D08"],
+    "resource_unavailable": false
+  },
+  {
+    "id": "D12",
+    "name": "Functional Dependencies",
+    "description": "Semantic dependencies between attribute sets, Armstrong's axioms, attribute closures, and minimal covers.",
+    "learning_objective": "Compute attribute closures, verify whether an FD holds, and find candidate keys using functional dependencies.",
+    "branch": "Design",
+    "prerequisites": ["D03"],
+    "resource_unavailable": false
+  },
+  {
+    "id": "D13",
+    "name": "Normalization (1NF-3NF)",
+    "description": "Schema decomposition, normal forms (1NF, 2NF, 3NF, BCNF), lossless-join property, and dependency preservation.",
+    "learning_objective": "Analyze relation schemas for update anomalies, determine normal form levels, and decompose into 3NF/BCNF.",
+    "branch": "Design",
+    "prerequisites": ["D03", "D12"],
+    "resource_unavailable": false
+  }
+]

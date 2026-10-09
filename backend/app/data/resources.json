@@ -1,0 +1,170 @@
+[
+  {
+    "concept_id": "D01",
+    "depth": "quick_revision",
+    "title": "DBMS Basics: Quick Revision",
+    "summary": "Core definitions of DBMS, three-schema architecture, and physical vs logical data independence.",
+    "content": "A Database Management System (DBMS) coordinates data storage, querying, and concurrency. The ANSI/SPARC 3-tier architecture divides systems into Physical (internal storage), Logical (conceptual schema), and View (external schemas). Logical data independence isolates user views from conceptual changes; physical data independence isolates the logical schema from storage reorganization."
+  },
+  {
+    "concept_id": "D01",
+    "depth": "standard",
+    "title": "DBMS Architecture & File vs DBMS Comparison",
+    "summary": "Detailed look at why DBMS replaces flat files, ACID properties introduction, and data abstraction.",
+    "content": "File-processing systems suffer from data redundancy, inconsistency, difficult access, atomicity problems, concurrent-access anomalies, and security flaws. A DBMS addresses these through centralized metadata (data dictionary), declarative query languages, transaction management (ACID guarantees), and multi-user concurrency control."
+  },
+  {
+    "concept_id": "D01",
+    "depth": "deep_learning",
+    "title": "Deep Dive: Storage Engines, Buffer Pools & System Catalogs",
+    "summary": "In-depth analysis of query engines, transaction logs, and storage hierarchies.",
+    "content": "A DBMS manages disk pages via buffer managers, maintains Write-Ahead Logging (WAL) for durability, and coordinates lock managers for serializable isolation. Data dictionaries store system catalogs (tables, columns, indexes), enabling dynamic schema evolution without recompilation of user applications."
+  },
+  {
+    "concept_id": "D02",
+    "depth": "quick_revision",
+    "title": "Relational Model: Quick Revision",
+    "summary": "Relations as sets of tuples, attributes, domains, and schema vs state.",
+    "content": "In Codd's Relational Model, a relation is a set of unordered tuples conforming to a relation schema R(A1, A2, ..., An). Attribute values must be atomic (First Normal Form). A relational database schema consists of relation schemas and integrity constraints, while the database state is the current collection of relation instances."
+  },
+  {
+    "concept_id": "D02",
+    "depth": "standard",
+    "title": "Formal Foundations of Relational Structures",
+    "summary": "Tuples, domains, null semantics, and mathematical relations.",
+    "content": "Mathematically, a relation on domains D1..Dn is a subset of the Cartesian product D1 x ... x Dn. Because a relation is a set, duplicate tuples are prohibited by definition. Column ordering and row ordering carry no semantic meaning. Special NULL markers represent unknown or inapplicable values."
+  },
+  {
+    "concept_id": "D02",
+    "depth": "deep_learning",
+    "title": "Deep Dive: Relational Algebra & Set Semantics",
+    "summary": "Underlying algebraic operations and transition from pure relations to SQL bags.",
+    "content": "The Relational Model serves as the mathematical foundation for relational algebra (select, project, union, set difference, Cartesian product, rename). While theoretical relations strictly enforce set semantics (no duplicate rows), practical implementations (SQL) use multiset/bag semantics unless DISTINCT is specified."
+  },
+  {
+    "concept_id": "D03",
+    "depth": "quick_revision",
+    "title": "Keys in Relational Databases: Quick Revision",
+    "summary": "Superkeys, candidate keys, primary keys, and foreign keys.",
+    "content": "A Superkey is any set of attributes that uniquely identifies a tuple. A Candidate Key is a minimal superkey (no proper subset is a superkey). The Primary Key is the chosen candidate key (cannot be null). A Foreign Key is a set of attributes in one relation that references the primary/candidate key of another relation."
+  },
+  {
+    "concept_id": "D03",
+    "depth": "standard",
+    "title": "Candidate Key Determination and Key Constraints",
+    "summary": "How to select primary keys and evaluate candidate key minimality.",
+    "content": "To determine candidate keys, attributes that never appear on the right side of functional dependencies must be in every candidate key. A relation can have multiple candidate keys (e.g. employee_id and national_id). The database designer selects one as the primary key based on stability and size; remaining candidate keys are alternate/unique keys."
+  },
+  {
+    "concept_id": "D03",
+    "depth": "deep_learning",
+    "title": "Deep Dive: Composite Keys, Surrogate Keys & Referencing Semantics",
+    "summary": "Tradeoffs between natural composite keys and surrogate keys, plus foreign key indexing.",
+    "content": "Natural keys originate from domain attributes, while surrogate keys are synthetic unique identifiers (UUIDs, auto-increment sequences). When designing foreign key references, referencing composite primary keys requires composite foreign keys of identical types. Indexing foreign key columns is essential to prevent table locks during cascade updates."
+  },
+  {
+    "concept_id": "D04",
+    "depth": "quick_revision",
+    "title": "Integrity Constraints: Quick Revision",
+    "summary": "Entity integrity, referential integrity, domain constraints, and cascade actions.",
+    "content": "Entity Integrity states that no primary key attribute may contain NULL. Referential Integrity states that foreign key values must either match a valid primary key value in the referenced table or be NULL. Referential actions define behavior on parent update/delete: RESTRICT/NO ACTION, CASCADE, SET NULL, or SET DEFAULT."
+  },
+  {
+    "concept_id": "D04",
+    "depth": "standard",
+    "title": "Enforcing Constraints & Referential Actions",
+    "summary": "Practical application of CHECK, NOT NULL, UNIQUE, and FOREIGN KEY constraints.",
+    "content": "Integrity constraints safeguard database validity against improper insertions, updates, and deletions. Domain constraints restrict attribute values (data types, ranges via CHECK). When a parent tuple is deleted, ON DELETE CASCADE automatically removes orphan child records, while ON DELETE RESTRICT aborts the operation if children exist."
+  },
+  {
+    "concept_id": "D04",
+    "depth": "deep_learning",
+    "title": "Deep Dive: Deferred Constraints & Circular References",
+    "summary": "Managing interdependent integrity constraints, deferrable checks, and transaction boundaries.",
+    "content": "Circular referential integrity occurs when Table A references Table B while Table B references Table A. Resolving insertion deadlocks requires DEFERRABLE INITIALLY DEFERRED constraints, allowing temporary constraint violations within a transaction that are strictly validated before COMMIT."
+  },
+  {
+    "concept_id": "D08",
+    "depth": "quick_revision",
+    "title": "SQL Basics: Quick Revision",
+    "summary": "SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY logical processing.",
+    "content": "Logical query execution order differs from syntactic order: 1. FROM, 2. WHERE (row filters), 3. GROUP BY (aggregation buckets), 4. HAVING (group filters), 5. SELECT (expressions and projections), 6. DISTINCT, 7. ORDER BY, 8. LIMIT. Aggregates (COUNT, SUM, AVG) cannot be evaluated in the WHERE clause."
+  },
+  {
+    "concept_id": "D08",
+    "depth": "standard",
+    "title": "SQL DDL, DML and Aggregations",
+    "summary": "Deep understanding of filtering rows vs groups, NULL handling in expressions.",
+    "content": "WHERE filters individual rows prior to grouping; HAVING filters aggregated groups after GROUP BY. In SQL three-valued logic (TRUE, FALSE, UNKNOWN), comparisons with NULL yield UNKNOWN. Consequently, `WHERE col = NULL` never matches any row; `WHERE col IS NULL` must be used."
+  },
+  {
+    "concept_id": "D08",
+    "depth": "deep_learning",
+    "title": "Deep Dive: Query Execution Plans & Three-Valued Logic",
+    "summary": "Cost-based optimization, index scans, and NULL semantics in Boolean logic.",
+    "content": "Query optimizers transform declarative SQL into procedural physical execution plans using cost models. Expressions involving NOT (UNKNOWN) evaluate to UNKNOWN. When using NOT IN with a subquery containing NULLs, the entire condition evaluates to false or unknown, returning zero rows."
+  },
+  {
+    "concept_id": "D09",
+    "depth": "quick_revision",
+    "title": "SQL Joins: Quick Revision",
+    "summary": "INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER, and CROSS joins.",
+    "content": "INNER JOIN retains only rows satisfying the join condition from both tables. LEFT OUTER JOIN retains all rows from the left table, padding right-table columns with NULL when no match exists. FULL OUTER JOIN retains all rows from both tables. CROSS JOIN produces the Cartesian product."
+  },
+  {
+    "concept_id": "D09",
+    "depth": "standard",
+    "title": "Join Cardinality, Predicate Placement & Outer Joins",
+    "summary": "Differences between ON clause predicates and WHERE clause predicates in outer joins.",
+    "content": "Join cardinality determines output row count: if table A has M matching rows for each of N rows in B, the join yields M*N rows. In a LEFT JOIN, placing a filter on the right table in the WHERE clause eliminates null-padded rows, effectively turning the query into an INNER JOIN. Right-table conditions must stay in the ON clause to preserve non-matching left rows."
+  },
+  {
+    "concept_id": "D09",
+    "depth": "deep_learning",
+    "title": "Deep Dive: Physical Join Algorithms & Optimization",
+    "summary": "Nested loop joins, hash joins, merge joins, and cost selection.",
+    "content": "The query optimizer selects among physical join algorithms: Nested Loop Join (ideal for small inputs or indexed lookups), Hash Join (efficient for large unsorted inputs with equi-joins), and Sort-Merge Join (optimal when both inputs are pre-sorted on the join key)."
+  },
+  {
+    "concept_id": "D12",
+    "depth": "quick_revision",
+    "title": "Functional Dependencies: Quick Revision",
+    "summary": "X -> Y definition, Armstrong axioms, and attribute closures.",
+    "content": "A Functional Dependency X -> Y holds on relation schema R if any two tuples agreeing on attribute set X must also agree on attribute set Y. Armstrong's Axioms are Reflexivity (if Y subset X, X -> Y), Augmentation (if X -> Y, XZ -> YZ), and Transitivity (if X -> Y and Y -> Z, X -> Z). Secondary rules include Union and Decomposition."
+  },
+  {
+    "concept_id": "D12",
+    "depth": "standard",
+    "title": "Attribute Closure Algorithm & Minimal Covers",
+    "summary": "Step-by-step calculation of X+ and identifying extraneous attributes.",
+    "content": "The attribute closure X+ with respect to a set of FDs F is the set of all attributes functionally determined by X under F. Algorithm: start with Closure = X; repeatedly add Y whenever W -> Y is in F and W is a subset of Closure, until no new attributes can be added. If X+ contains all attributes of R, X is a superkey of R."
+  },
+  {
+    "concept_id": "D12",
+    "depth": "deep_learning",
+    "title": "Deep Dive: Minimal Covers, Equivalence & Axiom Completeness",
+    "summary": "Canonical cover calculation and sound/complete deduction systems.",
+    "content": "A canonical (minimal) cover Fc for F has three properties: all right-hand sides are singletons, no left-hand side contains extraneous attributes, and no FD in Fc is redundant. Canonical covers are essential inputs for 3NF synthesis algorithms to ensure dependency preservation in polynomial time."
+  },
+  {
+    "concept_id": "D13",
+    "depth": "quick_revision",
+    "title": "Normalization (1NF-3NF): Quick Revision",
+    "summary": "Anomalies, 1NF, 2NF, 3NF, and BCNF definitions.",
+    "content": "Normalization reduces insertion, deletion, and update anomalies. 1NF: atomic values (no repeating groups). 2NF: 1NF and no partial dependencies (no non-prime attribute depends on a proper subset of any candidate key). 3NF: 2NF and no transitive dependencies (for every non-trivial X -> Y, X is a superkey OR Y is a prime attribute). BCNF: for every non-trivial X -> Y, X is a superkey."
+  },
+  {
+    "concept_id": "D13",
+    "depth": "standard",
+    "title": "Decomposition Algorithms, Lossless Joins & Dependency Preservation",
+    "summary": "Decomposing into 3NF and BCNF while preserving information and dependencies.",
+    "content": "Decomposition of R into R1 and R2 is lossless if and only if R1 ∩ R2 -> R1 or R1 ∩ R2 -> R2 holds in F+ (the intersection is a superkey of at least one schema). 3NF synthesis guarantees both lossless join and dependency preservation, whereas BCNF guarantees lossless join but may sacrifice dependency preservation."
+  },
+  {
+    "concept_id": "D13",
+    "depth": "deep_learning",
+    "title": "Deep Dive: BCNF vs 3NF Tradeoffs & Normalization in Real Systems",
+    "summary": "Practical engineering tradeoffs between redundancy, anomaly prevention, and join costs.",
+    "content": "In OLTP systems, 3NF/BCNF prevents anomaly corruption during frequent writes. However, excessive normalization increases join overhead for read-heavy workloads, often motivating selective denormalization or read-optimized analytical schemas (star/snowflake schemas)."
+  }
+]
