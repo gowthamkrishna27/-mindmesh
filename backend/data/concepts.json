@@ -1,0 +1,440 @@
+[
+  {
+    "id": "D01",
+    "name": "DBMS Basics",
+    "description": "Foundational concepts: data independence, 3-tier schema architecture, and DBMS vs file system distinctions.",
+    "difficulty": 1,
+    "learning_objectives": [
+      "Distinguish file systems from DBMS",
+      "Understand 3-tier schema architecture (Internal, Conceptual, External)",
+      "Define logical and physical data independence"
+    ],
+    "prerequisites": [],
+    "resources": [
+      {
+        "title": "DBMS Architecture & Three-Schema Framework",
+        "url": "https://en.wikipedia.org/wiki/Database#Database_management_system",
+        "summary": "Detailed overview of database schemas, abstraction levels, and independence."
+      }
+    ],
+    "x": 50,
+    "y": 220,
+    "tier": 1
+  },
+  {
+    "id": "D02",
+    "name": "Relational Model",
+    "description": "Tabular representation of data, relation schemas, tuples, attributes, domains, and relational characteristics.",
+    "difficulty": 1,
+    "learning_objectives": [
+      "Understand relations as sets of tuples",
+      "Define attribute domains and null value semantics",
+      "Distinguish between relation schema and relation state"
+    ],
+    "prerequisites": [
+      "D01"
+    ],
+    "resources": [
+      {
+        "title": "Relational Model Core Theory",
+        "url": "https://en.wikipedia.org/wiki/Relational_model",
+        "summary": "E.F. Codd's foundational relational definitions and constraints."
+      }
+    ],
+    "x": 210,
+    "y": 220,
+    "tier": 2
+  },
+  {
+    "id": "D03",
+    "name": "Keys",
+    "description": "Key definitions and identification: superkeys, candidate keys, primary keys, and foreign keys.",
+    "difficulty": 2,
+    "learning_objectives": [
+      "Distinguish superkeys from minimal candidate keys",
+      "Identify primary key criteria",
+      "Understand referential integrity constraints via foreign keys"
+    ],
+    "prerequisites": [
+      "D02"
+    ],
+    "resources": [
+      {
+        "title": "Database Keys & Foreign Key Integrity",
+        "url": "https://en.wikipedia.org/wiki/Candidate_key",
+        "summary": "Minimal candidate keys, uniqueness, and referential constraints."
+      }
+    ],
+    "x": 380,
+    "y": 150,
+    "tier": 3
+  },
+  {
+    "id": "D04",
+    "name": "Integrity Constraints",
+    "description": "Domain constraints, entity integrity, referential integrity, and check constraints.",
+    "difficulty": 2,
+    "learning_objectives": [
+      "Enforce entity integrity (primary keys cannot be null)",
+      "Specify foreign key actions (CASCADE, SET NULL, RESTRICT)",
+      "Formulate domain and check constraints"
+    ],
+    "prerequisites": [
+      "D02",
+      "D03"
+    ],
+    "resources": [
+      {
+        "title": "Data Integrity & Constraints",
+        "url": "https://en.wikipedia.org/wiki/Data_integrity",
+        "summary": "Preventing data corruption through declarative constraint checking."
+      }
+    ],
+    "x": 550,
+    "y": 70,
+    "tier": 4
+  },
+  {
+    "id": "D05",
+    "name": "ER Modeling",
+    "description": "Entity-Relationship modeling: entity sets, relationship types, cardinalities (1:1, 1:N, M:N), and weak entities.",
+    "difficulty": 2,
+    "learning_objectives": [
+      "Construct ER diagrams with entity and relationship sets",
+      "Specify structural constraints (cardinality ratios, participation)",
+      "Model weak entity sets with identifying relationships"
+    ],
+    "prerequisites": [
+      "D01"
+    ],
+    "resources": [
+      {
+        "title": "Conceptual ER Modeling",
+        "url": "https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model",
+        "summary": "Representing real-world requirements as ER conceptual diagrams."
+      }
+    ],
+    "x": 210,
+    "y": 80,
+    "tier": 2
+  },
+  {
+    "id": "D06",
+    "name": "ER-to-Relational Mapping",
+    "description": "Algorithms for mapping conceptual ER schemas into relational tables, handling complex cardinalities and weak entities.",
+    "difficulty": 3,
+    "learning_objectives": [
+      "Translate regular and weak entity sets into tables",
+      "Map 1:1, 1:N, and M:N relationships",
+      "Decompose multivalued attributes into distinct relations"
+    ],
+    "prerequisites": [
+      "D05",
+      "D03"
+    ],
+    "resources": [
+      {
+        "title": "7-Step ER to Relational Mapping",
+        "url": "https://en.wikipedia.org/wiki/Relational_model#Mapping_from_ER_model",
+        "summary": "Step-by-step algorithms converting ER diagrams into normalized relational DDL."
+      }
+    ],
+    "x": 550,
+    "y": 140,
+    "tier": 4
+  },
+  {
+    "id": "D07",
+    "name": "Relational Algebra",
+    "description": "Procedural query language: Selection (¤â), Projection (¤Ç), Union (Ôê¬), Set Difference (-), Cartesian Product (├ù), and Join (Ô¿Ø).",
+    "difficulty": 3,
+    "learning_objectives": [
+      "Evaluate unary operations: select and project",
+      "Execute binary set operations and Cartesian product",
+      "Compose complex relational algebra expressions with theta and natural joins"
+    ],
+    "prerequisites": [
+      "D02"
+    ],
+    "resources": [
+      {
+        "title": "Relational Algebra Fundamentals",
+        "url": "https://en.wikipedia.org/wiki/Relational_algebra",
+        "summary": "Theoretical query operators and algebra equivalences."
+      }
+    ],
+    "x": 380,
+    "y": 240,
+    "tier": 3
+  },
+  {
+    "id": "D08",
+    "name": "SQL Basics",
+    "description": "Structured Query Language foundations: DDL (CREATE, ALTER, DROP) and DML (SELECT, INSERT, UPDATE, DELETE, WHERE).",
+    "difficulty": 2,
+    "learning_objectives": [
+      "Formulate DDL table definitions with constraints",
+      "Write SELECT-FROM-WHERE query filters",
+      "Handle three-valued logic (TRUE, FALSE, UNKNOWN) with NULLs"
+    ],
+    "prerequisites": [
+      "D02"
+    ],
+    "resources": [
+      {
+        "title": "SQL Basics and Query Syntax",
+        "url": "https://en.wikipedia.org/wiki/SQL",
+        "summary": "Core DDL/DML syntax and query evaluation pipeline."
+      }
+    ],
+    "x": 380,
+    "y": 320,
+    "tier": 3
+  },
+  {
+    "id": "D09",
+    "name": "SQL Joins",
+    "description": "Combining relational datasets: INNER JOIN, LEFT/RIGHT/FULL OUTER JOIN, and CROSS JOIN.",
+    "difficulty": 3,
+    "learning_objectives": [
+      "Write multi-table inner joins with ON predicates",
+      "Distinguish outer joins and handle NULL padding",
+      "Avoid unintended Cartesian products"
+    ],
+    "prerequisites": [
+      "D08",
+      "D07"
+    ],
+    "resources": [
+      {
+        "title": "SQL Joins Visual Guide",
+        "url": "https://en.wikipedia.org/wiki/Join_(SQL)",
+        "summary": "Visual explanation of inner, left, right, and full outer joins."
+      }
+    ],
+    "x": 550,
+    "y": 290,
+    "tier": 4
+  },
+  {
+    "id": "D10",
+    "name": "Aggregation & GROUP BY",
+    "description": "Aggregate functions (COUNT, SUM, AVG, MIN, MAX), GROUP BY partitions, and HAVING clause filters.",
+    "difficulty": 3,
+    "learning_objectives": [
+      "Calculate summary statistics across rows",
+      "Partition datasets with GROUP BY",
+      "Differentiate row filtering (WHERE) vs group filtering (HAVING)"
+    ],
+    "prerequisites": [
+      "D08"
+    ],
+    "resources": [
+      {
+        "title": "SQL Aggregation and Grouping",
+        "url": "https://en.wikipedia.org/wiki/Aggregate_function",
+        "summary": "Group-level computations and HAVING predicates."
+      }
+    ],
+    "x": 550,
+    "y": 370,
+    "tier": 4
+  },
+  {
+    "id": "D11",
+    "name": "Subqueries and Views",
+    "description": "Nested queries, scalar subqueries, correlated subqueries, EXISTS/IN predicates, and virtual tables (views).",
+    "difficulty": 4,
+    "learning_objectives": [
+      "Write correlated and non-correlated subqueries",
+      "Utilize EXISTS, NOT EXISTS, IN, and ALL/ANY operators",
+      "Define views for data abstraction and security"
+    ],
+    "prerequisites": [
+      "D08",
+      "D09"
+    ],
+    "resources": [
+      {
+        "title": "Subqueries & Correlated Nested Queries",
+        "url": "https://en.wikipedia.org/wiki/Correlated_subquery",
+        "summary": "Nested query execution semantics and view virtual tables."
+      }
+    ],
+    "x": 720,
+    "y": 370,
+    "tier": 5
+  },
+  {
+    "id": "D12",
+    "name": "Functional Dependencies",
+    "description": "Functional dependencies X ÔåÆ Y, Armstrong's axioms (reflexivity, augmentation, transitivity), and attribute closure X+.",
+    "difficulty": 3,
+    "learning_objectives": [
+      "Define and interpret functional dependencies X ÔåÆ Y",
+      "Compute attribute closure (X+) under a given set of FDs",
+      "Determine all candidate keys using attribute closure"
+    ],
+    "prerequisites": [
+      "D03"
+    ],
+    "resources": [
+      {
+        "title": "Functional Dependencies & Attribute Closure",
+        "url": "https://en.wikipedia.org/wiki/Functional_dependency",
+        "summary": "Armstrong's axioms, closure algorithm, and minimal covers."
+      }
+    ],
+    "x": 550,
+    "y": 210,
+    "tier": 4
+  },
+  {
+    "id": "D13",
+    "name": "Normalization (1NF to 3NF)",
+    "description": "Database normalization to eliminate redundancy and update anomalies: First Normal Form, Second Normal Form, and Third Normal Form.",
+    "difficulty": 4,
+    "learning_objectives": [
+      "Ensure 1NF (atomic attributes, no repeating groups)",
+      "Eliminate partial dependencies on candidate keys for 2NF",
+      "Eliminate transitive dependencies for 3NF"
+    ],
+    "prerequisites": [
+      "D12",
+      "D03"
+    ],
+    "resources": [
+      {
+        "title": "Relational Normalization (1NF through 3NF)",
+        "url": "https://en.wikipedia.org/wiki/Database_normalization",
+        "summary": "Step-by-step normal form testing and anomaly elimination."
+      }
+    ],
+    "x": 720,
+    "y": 210,
+    "tier": 5
+  },
+  {
+    "id": "D14",
+    "name": "BCNF and Decomposition",
+    "description": "Boyce-Codd Normal Form, lossless-join decomposition testing, and dependency preservation properties.",
+    "difficulty": 4,
+    "learning_objectives": [
+      "Evaluate BCNF condition (every determinant must be a superkey)",
+      "Apply lossless-join decomposition algorithm",
+      "Analyze dependency preservation trade-offs between 3NF and BCNF"
+    ],
+    "prerequisites": [
+      "D13"
+    ],
+    "resources": [
+      {
+        "title": "Boyce-Codd Normal Form & Lossless Decomposition",
+        "url": "https://en.wikipedia.org/wiki/Boyce%E2%80%93Codd_normal_form",
+        "summary": "BCNF decomposition algorithms and property preservation."
+      }
+    ],
+    "x": 890,
+    "y": 210,
+    "tier": 6
+  },
+  {
+    "id": "D15",
+    "name": "Transactions and ACID",
+    "description": "Transaction concepts, transaction states, and ACID properties (Atomicity, Consistency, Isolation, Durability).",
+    "difficulty": 3,
+    "learning_objectives": [
+      "Define transaction states: active, committed, aborted",
+      "Explain ACID properties and recovery requirements",
+      "Identify concurrent anomalies (dirty reads, non-repeatable reads, phantoms)"
+    ],
+    "prerequisites": [
+      "D01"
+    ],
+    "resources": [
+      {
+        "title": "ACID Properties & Transaction Processing",
+        "url": "https://en.wikipedia.org/wiki/ACID",
+        "summary": "Transaction state transitions, logging, and durability guarantees."
+      }
+    ],
+    "x": 210,
+    "y": 380,
+    "tier": 2
+  },
+  {
+    "id": "D16",
+    "name": "Concurrency Control",
+    "description": "Serializability (conflict and view), precedence graphs, lock-based protocols (2PL, strict 2PL), and deadlock resolution.",
+    "difficulty": 4,
+    "learning_objectives": [
+      "Build precedence graphs to test conflict serializability",
+      "Implement Two-Phase Locking (2PL) and Strict 2PL",
+      "Detect and resolve deadlocks with wait-for graphs and timestamps"
+    ],
+    "prerequisites": [
+      "D15"
+    ],
+    "resources": [
+      {
+        "title": "Concurrency Control & Serializability",
+        "url": "https://en.wikipedia.org/wiki/Concurrency_control",
+        "summary": "Precedence graphs, lock schedules, and deadlock prevention."
+      }
+    ],
+    "x": 380,
+    "y": 440,
+    "tier": 3
+  },
+  {
+    "id": "D17",
+    "name": "Indexing (B+ trees)",
+    "description": "File organization, primary vs secondary indices, clustered indices, and B+ tree index structure and search/insert operations.",
+    "difficulty": 4,
+    "learning_objectives": [
+      "Compare clustered vs secondary indices",
+      "Trace B+ tree search paths and node split logic",
+      "Evaluate index selection impact on query execution cost"
+    ],
+    "prerequisites": [
+      "D03",
+      "D08"
+    ],
+    "resources": [
+      {
+        "title": "B+ Tree Indexing Architecture",
+        "url": "https://en.wikipedia.org/wiki/B%2B_tree",
+        "summary": "Balanced search tree structure, leaf node linking, and I/O optimization."
+      }
+    ],
+    "x": 720,
+    "y": 290,
+    "tier": 5
+  },
+  {
+    "id": "D18",
+    "name": "Query Processing & Optimization",
+    "description": "Query processing stages (parsing, translation, optimization), relational algebra equivalences, and cost-based plan selection.",
+    "difficulty": 5,
+    "learning_objectives": [
+      "Trace query pipeline: SQL to relational algebra expression trees",
+      "Apply heuristic optimization (push selections and projections early)",
+      "Estimate query cost using database catalog statistics"
+    ],
+    "prerequisites": [
+      "D07",
+      "D09",
+      "D17"
+    ],
+    "resources": [
+      {
+        "title": "Query Optimization and Plan Selection",
+        "url": "https://en.wikipedia.org/wiki/Query_optimization",
+        "summary": "Heuristic and cost-based relational query optimizers."
+      }
+    ],
+    "x": 890,
+    "y": 300,
+    "tier": 6
+  }
+]
