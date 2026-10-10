@@ -3,8 +3,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { CohortHeatmapRow, Concept, SimulationBenchmarkItem } from '@/lib/types';
 import { fetchCohortData, fetchConcepts } from '@/lib/apiClient';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { cn } from '../lib/utils';
 import {
   Users,
   AlertTriangle,

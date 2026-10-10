@@ -14,8 +14,8 @@ import {
   BookOpen,
   LogOut
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { cn } from '../lib/utils';
 import {
   StudentMastery,
   ResponseRecord,

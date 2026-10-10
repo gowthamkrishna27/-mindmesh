@@ -16,8 +16,8 @@ const POST_RETEST_MASTERY: Record<string, { p: number }> = {
   D03: { p: 0.82 },
   D08: { p: 0.92 }
 };
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { cn } from '../lib/utils';
 import {
   TrendingUp,
   CheckCircle2,

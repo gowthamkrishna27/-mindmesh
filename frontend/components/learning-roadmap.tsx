@@ -37,8 +37,8 @@ const DEFAULT_LEARNING_PATH: LearningPathItem[] = [
     practice_solution: "Violates 3NF due to transitive dependency Instructor -> Office."
   }
 ];
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { cn } from '../lib/utils';
 import {
   CheckCircle2,
   BookOpen,

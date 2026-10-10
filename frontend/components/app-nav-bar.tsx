@@ -15,8 +15,8 @@ import {
   User,
   ShieldCheck
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
+import { cn } from '../lib/utils';
 
 export type NavTabId = 'dashboard' | 'quiz' | 'diagnosis' | 'retest' | 'educator';
 
