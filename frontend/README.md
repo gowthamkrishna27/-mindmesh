@@ -8,12 +8,12 @@ Modern Next.js 16 (App Router) + React 19 web application for the **MindMesh Ada
 
 ### 1. Install Dependencies
 ```powershell
-npm install
+pnpm install
 ```
 
 ### 2. Start Development Server
 ```powershell
-npm run dev
+pnpm dev
 ```
 
 App will run at: **[http://localhost:3000](http://localhost:3000)**
@@ -35,9 +35,9 @@ The application includes demo credentials:
 
 | Command | Action |
 |---|---|
-| `npm run dev` | Starts local Next.js Turbopack development server on port `3000` |
-| `npm run build` | Compiles and optimizes production bundle |
-| `npm run start` | Serves compiled production build |
+| `pnpm dev` | Starts local Next.js Turbopack development server on port `3000` |
+| `pnpm build` | Compiles and optimizes production bundle |
+| `pnpm start` | Serves compiled production build |
 
 ---
 
