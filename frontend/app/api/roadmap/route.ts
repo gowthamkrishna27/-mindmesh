@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getConceptsFromDB } from '@/lib/supabase';
 import { ConceptGraphEngine } from '@/lib/graphEngine';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+const BACKEND_URL = process.env.BACKEND_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export async function POST(req: NextRequest) {
   let gap_ids: string[] = ['D12', 'D13'];
@@ -15,19 +15,21 @@ export async function POST(req: NextRequest) {
     // defaults
   }
 
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/roadmap`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ gap_ids }),
-      signal: AbortSignal.timeout(1000)
-    });
-    if (res.ok) {
-      const data = await res.json();
-      return NextResponse.json(data);
+  if (BACKEND_URL) {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/roadmap`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gap_ids }),
+        signal: AbortSignal.timeout(12000)
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return NextResponse.json(data);
+      }
+    } catch {
+      // Fall back smoothly to local graph engine
     }
-  } catch {
-    // If backend offline, compute topological remediation sequence using ConceptGraphEngine
   }
 
   const concepts = await getConceptsFromDB();
