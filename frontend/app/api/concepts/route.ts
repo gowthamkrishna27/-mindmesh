@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { getConceptsFromDB } from '@/lib/supabase';
+import { NextRequest, NextResponse } from 'next/server';
+import { getConceptsFromDB, saveKnowledgeGraphToDB } from '@/lib/supabase';
 
 export async function GET() {
   try {
@@ -12,3 +12,18 @@ export async function GET() {
     return NextResponse.json({ error: err.message || 'Database error' }, { status: 500 });
   }
 }
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const concepts = Array.isArray(body) ? body : (body.concepts || [body]);
+    const success = await saveKnowledgeGraphToDB(concepts);
+    if (!success) {
+      return NextResponse.json({ error: 'Failed to save concepts to database' }, { status: 500 });
+    }
+    return NextResponse.json({ success: true, count: concepts.length });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message || 'Server error' }, { status: 500 });
+  }
+}
+

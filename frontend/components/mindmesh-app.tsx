@@ -127,16 +127,17 @@ export function MindmeshApp() {
       };
     });
 
+    const userId =
+      typeof window !== 'undefined'
+        ? localStorage.getItem('mindmesh_user_id') || 'usr_alex_chen'
+        : 'usr_alex_chen';
+
     try {
-      const diag = await diagnoseWithNetworkX(formatted);
+      const diag = await diagnoseWithNetworkX(formatted, userId);
       if (diag && diag.mastery_map) {
         setMasteryMap(diag.mastery_map);
         if (diag.root_gap_id) setRootGapId(diag.root_gap_id);
-        const userId =
-          typeof window !== 'undefined'
-            ? localStorage.getItem('mindmesh_user_id') || 'usr_alex_chen'
-            : 'usr_alex_chen';
-        saveStudentMastery(userId, diag.mastery_map);
+        await saveStudentMastery(userId, diag.mastery_map);
       }
     } catch {
       // In case backend is connecting
@@ -159,11 +160,7 @@ export function MindmeshApp() {
       };
     });
 
-    const userId =
-      typeof window !== 'undefined'
-        ? localStorage.getItem('mindmesh_user_id') || 'usr_alex_chen'
-        : 'usr_alex_chen';
-    saveQuizResponses(userId, newResponses);
+    await saveQuizResponses(userId, newResponses);
 
     setResponses(prev => [...newResponses, ...prev]);
     setView('diagnosis');
@@ -175,6 +172,7 @@ export function MindmeshApp() {
       localStorage.removeItem('mindmesh_logged_in');
       localStorage.removeItem('mindmesh_role');
       localStorage.removeItem('mindmesh_user');
+      localStorage.removeItem('mindmesh_user_id');
       document.cookie = 'mindmesh_logged_in=; path=/; max-age=0';
       document.cookie = 'mindmesh_role=; path=/; max-age=0';
       document.cookie = 'mindmesh_user=; path=/; max-age=0';

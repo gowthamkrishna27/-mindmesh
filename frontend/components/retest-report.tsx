@@ -74,7 +74,7 @@ const RETEST_QUESTIONS: Question[] = [
   }
 ];
 
-import { fetchConcepts, fetchQuestions } from '@/lib/apiClient';
+import { fetchConcepts, fetchQuestions, fetchStudentMastery, saveStudentMastery, saveQuizResponses } from '@/lib/apiClient';
 
 export function RetestReport({ onBackToDashboard, onViewDiagnosis, onViewRoadmap }: RetestReportProps) {
   const [inRetestQuiz, setInRetestQuiz] = useState(true);
@@ -104,6 +104,45 @@ export function RetestReport({ onBackToDashboard, onViewDiagnosis, onViewRoadmap
       setCurrentIdx(i => i + 1);
     } else {
       setInRetestQuiz(false);
+      // Persist the post-retest verified progress to Supabase DB
+      const userId =
+        typeof window !== 'undefined'
+          ? localStorage.getItem('mindmesh_user_id') || 'usr_alex_chen'
+          : 'usr_alex_chen';
+
+      fetchStudentMastery(userId).then(existingMastery => {
+        const updated = { ...(existingMastery || {}) };
+        Object.entries(POST_RETEST_MASTERY).forEach(([cId, data]) => {
+          updated[cId] = {
+            concept_id: cId,
+            p: data.p,
+            n_direct: (updated[cId]?.n_direct || 0) + 1,
+            n_indirect: updated[cId]?.n_indirect || 0,
+            status: 'mastered',
+            blocker_score: 0.0
+          };
+        });
+        saveStudentMastery(userId, updated);
+      });
+
+      const responseRecords = questions.map((q, idx) => {
+        const chosenId = nextAnswers[idx];
+        const opt = q.options.find(o => o.id === chosenId);
+        return {
+          id: 'R_retest_' + Date.now() + '_' + idx,
+          question_id: q.id,
+          concept_id: q.concept,
+          option_id: chosenId || 'b',
+          correct: !!opt?.correct,
+          confidence: 'high' as const,
+          response_ms: 8500,
+          evidence_weight: 1.25,
+          distractor_mapped_to: opt?.maps_to,
+          misconception: opt?.misconception,
+          timestamp: new Date().toISOString()
+        };
+      });
+      saveQuizResponses(userId, responseRecords);
     }
   };
 

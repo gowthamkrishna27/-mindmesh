@@ -133,20 +133,53 @@ export async function getStudentMasteryFromDB(
   return map;
 }
 
+export async function ensureUserExists(studentId: string = 'usr_alex_chen') {
+  try {
+    const { data } = await supabase.from('users').select('id').eq('id', studentId).maybeSingle();
+    if (!data) {
+      await supabase.from('users').insert({
+        id: studentId,
+        email: `${studentId}@mindmesh.edu`,
+        name: studentId.replace(/^usr_/, '').replace(/_/g, ' '),
+        role: 'student'
+      });
+    }
+  } catch (err) {
+    console.warn('Notice ensuring user in database:', err);
+  }
+}
+
+const VALID_MASTERY_STATUSES = new Set([
+  'mastered',
+  'confirmed',
+  'suspected',
+  'insufficient',
+  'untested',
+  'rejected',
+  'uncertain'
+]);
+
 export async function saveStudentMasteryToDB(
   studentId: string = 'usr_alex_chen',
   masteryMap: Record<string, StudentMastery>
 ) {
-  const rows = Object.values(masteryMap).map(m => ({
-    student_id: studentId,
-    concept_id: m.concept_id,
-    p: m.p,
-    n_direct: m.n_direct,
-    n_indirect: m.n_indirect,
-    status: m.status,
-    blocker_score: m.blocker_score || 0.0,
-    updated_at: new Date().toISOString()
-  }));
+  if (!masteryMap || Object.keys(masteryMap).length === 0) return;
+  await ensureUserExists(studentId);
+
+  const rows = Object.values(masteryMap).map(m => {
+    const rawStatus = (m.status || '').toLowerCase();
+    const status = VALID_MASTERY_STATUSES.has(rawStatus) ? rawStatus : 'insufficient';
+    return {
+      student_id: studentId,
+      concept_id: m.concept_id,
+      p: typeof m.p === 'number' ? Number(m.p.toFixed(2)) : 0.5,
+      n_direct: typeof m.n_direct === 'number' ? m.n_direct : 0,
+      n_indirect: typeof m.n_indirect === 'number' ? m.n_indirect : 0,
+      status: status,
+      blocker_score: typeof m.blocker_score === 'number' ? Number(m.blocker_score.toFixed(4)) : 0.0,
+      updated_at: new Date().toISOString()
+    };
+  });
 
   const { error } = await supabase
     .from('student_mastery')
@@ -162,6 +195,8 @@ export async function saveQuizResponsesToDB(
   responses: ResponseRecord[]
 ) {
   if (!responses || !Array.isArray(responses) || responses.length === 0) return;
+  await ensureUserExists(studentId);
+
   try {
     const rows = responses.map(r => ({
       id: r.id || 'R_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
@@ -184,6 +219,55 @@ export async function saveQuizResponsesToDB(
     }
   } catch (err) {
     console.warn('Quiz responses save bypassed:', err);
+  }
+}
+
+export async function saveKnowledgeGraphToDB(concepts: Concept[]): Promise<boolean> {
+  if (!concepts || !Array.isArray(concepts) || concepts.length === 0) return false;
+  try {
+    // 1. Upsert concepts table
+    const conceptRows = concepts.map(c => ({
+      id: c.id,
+      name: c.name,
+      description: c.description || '',
+      difficulty: c.difficulty || 1,
+      tier: c.tier || 1,
+      x: c.x || 0,
+      y: c.y || 0,
+      learning_objectives: c.learning_objectives || [],
+      resources: c.resources || []
+    }));
+
+    const { error: conceptErr } = await supabase
+      .from('concepts')
+      .upsert(conceptRows, { onConflict: 'id' });
+
+    if (conceptErr) {
+      console.error('Error saving concepts to Supabase:', conceptErr);
+      return false;
+    }
+
+    // 2. Upsert prerequisite edges
+    const edgeRows: Array<{ source_id: string; target_id: string }> = [];
+    concepts.forEach(c => {
+      (c.prerequisites || []).forEach(prereqId => {
+        edgeRows.push({ source_id: prereqId, target_id: c.id });
+      });
+    });
+
+    if (edgeRows.length > 0) {
+      const { error: edgeErr } = await supabase
+        .from('concept_prerequisites')
+        .upsert(edgeRows, { onConflict: 'source_id,target_id' });
+
+      if (edgeErr) {
+        console.error('Error saving prerequisite edges to Supabase:', edgeErr);
+      }
+    }
+    return true;
+  } catch (err) {
+    console.error('Error in saveKnowledgeGraphToDB:', err);
+    return false;
   }
 }
 

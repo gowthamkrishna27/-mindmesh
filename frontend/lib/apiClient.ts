@@ -155,8 +155,24 @@ export async function fetchCohortData(): Promise<{
   }
 }
 
+export async function saveKnowledgeGraph(concepts: Concept[]): Promise<boolean> {
+  try {
+    const res = await fetch(`${API_BASE}/graph`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ concepts }),
+      cache: 'no-store'
+    });
+    return res.ok;
+  } catch (err) {
+    console.error('Failed to save knowledge graph:', err);
+    return false;
+  }
+}
+
 export {
   getStudentMasteryFromDB as fetchStudentMastery,
   saveStudentMasteryToDB as saveStudentMastery,
-  saveQuizResponsesToDB as saveQuizResponses
+  saveQuizResponsesToDB as saveQuizResponses,
+  saveKnowledgeGraphToDB
 } from './supabase';

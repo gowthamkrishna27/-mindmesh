@@ -8,6 +8,9 @@ from pathlib import Path
 from typing import Dict, List, Set, Tuple, Any, Optional
 import networkx as nx  # type: ignore
 
+import os
+import urllib.request
+
 class ConceptGraphEngine:
     def __init__(self, concepts_path: Optional[Path] = None, questions_path: Optional[Path] = None):
         self.G = nx.DiGraph()
@@ -18,7 +21,9 @@ class ConceptGraphEngine:
         c_path = concepts_path or (base_dir / "concepts.json")
         q_path = questions_path or (base_dir / "questions.json")
         
-        if c_path.exists():
+        # Try loading canonical live graph from Supabase DB first
+        loaded_from_db = self.load_from_db_if_available()
+        if not loaded_from_db and c_path.exists():
             with open(c_path, "r", encoding="utf-8") as f:
                 concepts_list = json.load(f)
                 self.load_concepts(concepts_list)
@@ -27,6 +32,44 @@ class ConceptGraphEngine:
             with open(q_path, "r", encoding="utf-8") as f:
                 questions_list = json.load(f)
                 self.questions_data = {q["id"]: q for q in questions_list}
+
+    def load_from_db_if_available(self) -> bool:
+        """Attempt to fetch concepts and prerequisites directly from Supabase DB."""
+        sb_url = os.environ.get("SUPABASE_URL") or "https://aquuguxootxwytaxsxhd.supabase.co"
+        sb_key = os.environ.get("SUPABASE_KEY") or "sb_publishable_JS6eTq5s5Gm3a5KLm9-Zfw_NIz0PDQt"
+        if not sb_url or not sb_key:
+            return False
+        try:
+            req_c = urllib.request.Request(
+                f"{sb_url.rstrip('/')}/rest/v1/concepts?select=*&order=id.asc",
+                headers={"apikey": sb_key, "Authorization": f"Bearer {sb_key}"}
+            )
+            with urllib.request.urlopen(req_c, timeout=5) as resp:
+                concepts_db = json.loads(resp.read().decode())
+            
+            req_e = urllib.request.Request(
+                f"{sb_url.rstrip('/')}/rest/v1/concept_prerequisites?select=*",
+                headers={"apikey": sb_key, "Authorization": f"Bearer {sb_key}"}
+            )
+            with urllib.request.urlopen(req_e, timeout=5) as resp:
+                edges_db = json.loads(resp.read().decode())
+                
+            prereq_map: Dict[str, List[str]] = {}
+            for e in edges_db:
+                prereq_map.setdefault(e["target_id"], []).append(e["source_id"])
+                
+            formatted = []
+            for c in concepts_db:
+                c_copy = dict(c)
+                c_copy["prerequisites"] = prereq_map.get(c["id"], [])
+                formatted.append(c_copy)
+                
+            if formatted:
+                self.load_concepts(formatted)
+                return True
+        except Exception:
+            pass
+        return False
 
     def load_concepts(self, concepts: List[Dict[str, Any]]) -> None:
         """FR-G1: Build Directed Acyclic Graph from concepts list and FR-G2: validate."""

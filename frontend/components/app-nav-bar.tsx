@@ -79,6 +79,7 @@ export function AppNavBar({
       localStorage.removeItem('mindmesh_logged_in');
       localStorage.removeItem('mindmesh_role');
       localStorage.removeItem('mindmesh_user');
+      localStorage.removeItem('mindmesh_user_id');
       document.cookie = 'mindmesh_logged_in=; path=/; max-age=0';
       document.cookie = 'mindmesh_role=; path=/; max-age=0';
       document.cookie = 'mindmesh_user=; path=/; max-age=0';
