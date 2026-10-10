@@ -1,32 +1,57 @@
-# React + TypeScript + Vite
+# MindMesh — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Modern Next.js 16 (App Router) + React 19 web application for the **MindMesh Adaptive Learning Dependency Graph**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ⚡ Quick Start
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### 1. Install Dependencies
+```powershell
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 2. Start Development Server
+```powershell
+npm run dev
+```
+
+App will run at: **[http://localhost:3000](http://localhost:3000)**
+
+---
+
+## 🔑 Demo Login Credentials
+
+The application includes demo credentials:
+
+| Role | Email | Password |
+|---|---|---|
+| **Student** | `alex.chen@mindmesh.edu` | `student123` |
+| **Educator** | `aris.thorne@mindmesh.edu` | `faculty123` |
+
+---
+
+## 📋 Available Commands
+
+| Command | Action |
+|---|---|
+| `npm run dev` | Starts local Next.js Turbopack development server on port `3000` |
+| `npm run build` | Compiles and optimizes production bundle |
+| `npm run start` | Serves compiled production build |
+
+---
+
+## 🔗 NetworkX Backend API Integration
+
+The frontend connects directly to the Python **NetworkX FastAPI** service on `http://localhost:8000`:
+
+1. In a separate terminal, launch the backend:
+   ```powershell
+   cd ..\backend
+   .\venv\Scripts\Activate.ps1
+   uvicorn main:app --reload --port 8000
+   ```
+2. Configure custom backend URL if needed in `.env.local`:
+   ```env
+   NEXT_PUBLIC_BACKEND_URL=http://localhost:8000
+   ```

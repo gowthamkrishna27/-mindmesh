@@ -1,3 +1,9 @@
+# Node / Dependencies
+node_modules/
+.next/
+*.local
+out/
+
 # Python
 __pycache__/
 *.py[cod]
