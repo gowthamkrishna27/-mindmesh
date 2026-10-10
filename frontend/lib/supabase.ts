@@ -222,6 +222,35 @@ export async function saveQuizResponsesToDB(
   }
 }
 
+export async function getQuizResponsesFromDB(studentId: string = 'usr_alex_chen'): Promise<ResponseRecord[]> {
+  try {
+    const { data, error } = await supabase
+      .from('quiz_responses')
+      .select('*')
+      .eq('student_id', studentId)
+      .order('created_at', { ascending: false })
+      .limit(50);
+
+    if (error || !data) return [];
+    return data.map((r: any) => ({
+      id: r.id,
+      question_id: r.question_id,
+      concept_id: r.concept_id,
+      option_id: r.option_id,
+      correct: Boolean(r.correct),
+      confidence: r.confidence || 'medium',
+      response_ms: Number(r.response_ms || 0),
+      evidence_weight: Number(r.evidence_weight || 1.0),
+      distractor_mapped_to: r.distractor_mapped_to || undefined,
+      misconception: r.misconception || undefined,
+      timestamp: r.created_at || new Date().toISOString()
+    }));
+  } catch (err) {
+    console.warn('Failed to fetch quiz responses from DB:', err);
+    return [];
+  }
+}
+
 export async function saveKnowledgeGraphToDB(concepts: Concept[]): Promise<boolean> {
   if (!concepts || !Array.isArray(concepts) || concepts.length === 0) return false;
   try {

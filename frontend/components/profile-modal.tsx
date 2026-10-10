@@ -46,7 +46,9 @@ export function ProfileModal({
     .join('')
     .toUpperCase() || 'MM';
 
-  const email = role === 'student' ? 'alex.chen@mindmesh.edu' : 'aris.thorne@mindmesh.edu';
+  const email =
+    (typeof window !== 'undefined' ? localStorage.getItem('mindmesh_email') : null) ||
+    (role === 'student' ? 'student@mindmesh.edu' : 'educator@mindmesh.edu');
   const roleLabel = role === 'student' ? 'Student' : 'Educator';
 
   return (

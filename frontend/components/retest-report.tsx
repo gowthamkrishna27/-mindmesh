@@ -75,6 +75,7 @@ const RETEST_QUESTIONS: Question[] = [
 ];
 
 import { fetchConcepts, fetchQuestions, fetchStudentMastery, saveStudentMastery, saveQuizResponses } from '@/lib/apiClient';
+import { selectAdaptiveQuizQuestions } from '@/lib/quizSelection';
 
 export function RetestReport({ onBackToDashboard, onViewDiagnosis, onViewRoadmap }: RetestReportProps) {
   const [inRetestQuiz, setInRetestQuiz] = useState(true);
@@ -89,8 +90,12 @@ export function RetestReport({ onBackToDashboard, onViewDiagnosis, onViewRoadmap
       if (c && c.length > 0) setConcepts(c);
     });
     fetchQuestions('B').then(qs => {
-      const filtered = qs.filter(q => q.concept === 'D12' || q.concept === 'D13');
-      if (filtered.length > 0) setQuestions(filtered);
+      if (qs && qs.length > 0) {
+        const filtered = qs.filter(q => q.concept === 'D12' || q.concept === 'D13');
+        const candidatePool = filtered.length >= 4 ? filtered : qs;
+        const shuffled = selectAdaptiveQuizQuestions(candidatePool, { count: 4, shuffleOptions: true });
+        if (shuffled.length > 0) setQuestions(shuffled);
+      }
     });
   }, []);
 
@@ -370,7 +375,7 @@ export function RetestReport({ onBackToDashboard, onViewDiagnosis, onViewRoadmap
           }}
         >
           <RotateCcw className="mr-2 size-4" />
-          Retake Retest
+          Practice Another Verification Set
         </Button>
       </div>
     </div>

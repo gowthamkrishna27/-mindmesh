@@ -2,7 +2,7 @@
 FastAPI service exposing MindMesh NetworkX Concept Graph Engine
 """
 
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from fastapi import FastAPI, HTTPException  # type: ignore
 from fastapi.middleware.cors import CORSMiddleware  # type: ignore
 from pathlib import Path
@@ -59,9 +59,25 @@ def get_concepts():
     return list(engine.concepts_data.values())
 
 @app.get("/api/questions", response_model=List[Dict[str, Any]])
-def get_questions():
-    """Return all 36 diagnostic question bank items."""
-    return list(engine.questions_data.values())
+def get_questions(
+    family: Optional[str] = None,
+    concept: Optional[str] = None,
+    shuffle: bool = False,
+    limit: Optional[int] = None
+):
+    """Return diagnostic question bank items with optional filtering and shuffling."""
+    qs = list(engine.questions_data.values())
+    if family:
+        qs = [q for q in qs if q.get("family", "").upper() == family.upper()]
+    if concept:
+        qs = [q for q in qs if q.get("concept", "") == concept]
+    if shuffle:
+        import random
+        qs = list(qs)
+        random.shuffle(qs)
+    if limit is not None and limit > 0:
+        qs = qs[:limit]
+    return qs
 
 @app.get("/api/graph", response_model=GraphDataResponse)
 def get_graph_data():

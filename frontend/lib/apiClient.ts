@@ -54,10 +54,22 @@ export async function fetchConcepts(): Promise<Concept[]> {
   }
 }
 
-export async function fetchQuestions(family?: 'A' | 'B'): Promise<Question[]> {
+export async function fetchQuestions(
+  family?: 'A' | 'B',
+  options?: { concept?: string; shuffle?: boolean; limit?: number; exclude?: string[] }
+): Promise<Question[]> {
   try {
-    const url = family ? `${API_BASE}/questions?family=${family}` : `${API_BASE}/questions`;
-    const res = await fetch(url, { cache: 'no-store' });
+    const params = new URLSearchParams();
+    if (family) params.append('family', family);
+    if (options?.concept) params.append('concept', options.concept);
+    if (options?.shuffle) params.append('shuffle', 'true');
+    if (options?.limit) params.append('limit', options.limit.toString());
+    if (options?.exclude && options.exclude.length > 0) {
+      params.append('exclude', options.exclude.join(','));
+    }
+
+    const queryStr = params.toString() ? `?${params.toString()}` : '';
+    const res = await fetch(`${API_BASE}/questions${queryStr}`, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } catch (err) {
@@ -174,5 +186,6 @@ export {
   getStudentMasteryFromDB as fetchStudentMastery,
   saveStudentMasteryToDB as saveStudentMastery,
   saveQuizResponsesToDB as saveQuizResponses,
+  getQuizResponsesFromDB as fetchQuizResponses,
   saveKnowledgeGraphToDB
 } from './supabase';

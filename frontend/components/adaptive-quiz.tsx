@@ -10,11 +10,36 @@ import {
   ArrowRight,
   HelpCircle,
   ThumbsUp,
-  Sparkles
+  Sparkles,
+  Shuffle,
+  BookOpen,
+  Layers
 } from 'lucide-react';
+
+export const CONCEPT_NAMES: Record<string, string> = {
+  D01: 'DBMS Basics',
+  D02: 'Relational Model',
+  D03: 'Keys',
+  D04: 'Integrity Constraints',
+  D05: 'ER Modeling',
+  D06: 'ER-to-Relational Mapping',
+  D07: 'Relational Algebra',
+  D08: 'SQL Basics',
+  D09: 'SQL Joins',
+  D10: 'Aggregation & GROUP BY',
+  D11: 'Subqueries & Views',
+  D12: 'Functional Dependencies',
+  D13: 'Normalization (1NF-3NF)',
+  D14: 'BCNF & Decomposition',
+  D15: 'Transactions & ACID',
+  D16: 'Concurrency Control',
+  D17: 'Indexing (B+ Trees)',
+  D18: 'Query Optimization'
+};
 
 interface AdaptiveQuizProps {
   questions: Question[];
+  totalBankCount?: number;
   onComplete: (sessionData: {
     responses: {
       question: Question;
@@ -25,9 +50,20 @@ interface AdaptiveQuizProps {
     }[];
   }) => void;
   onCancel?: () => void;
+  onReshuffle?: () => void;
+  questionCount?: number;
+  onQuestionCountChange?: (count: number) => void;
 }
 
-export function AdaptiveQuiz({ questions, onComplete, onCancel }: AdaptiveQuizProps) {
+export function AdaptiveQuiz({
+  questions,
+  totalBankCount = 236,
+  onComplete,
+  onCancel,
+  onReshuffle,
+  questionCount = 8,
+  onQuestionCountChange
+}: AdaptiveQuizProps) {
   const [hasConsented, setHasConsented] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
@@ -61,15 +97,20 @@ export function AdaptiveQuiz({ questions, onComplete, onCancel }: AdaptiveQuizPr
 
   if (!questions || questions.length === 0) {
     return (
-      <div className="flex min-h-[300px] items-center justify-center rounded-xl border bg-card p-8">
-        <p className="text-sm text-muted-foreground animate-pulse">
-          Loading diagnostic questions from database...
+      <div className="flex min-h-[300px] flex-col items-center justify-center rounded-xl border bg-card p-8 text-center space-y-4">
+        <div className="size-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+        <p className="text-sm font-medium text-foreground">
+          Loading and shuffling questions from 236-question bank...
+        </p>
+        <p className="text-xs text-muted-foreground">
+          Selecting optimal diagnostic sampling across all 18 DBMS concepts
         </p>
       </div>
     );
   }
 
   const currentQuestion = questions[currentIndex] || questions[0];
+  const conceptName = CONCEPT_NAMES[currentQuestion?.concept] || currentQuestion?.concept || 'DBMS Concept';
 
   const handleSelectOption = (optionId: string) => {
     if (selectedOptionId !== null && selectedOptionId !== optionId) {
@@ -100,40 +141,91 @@ export function AdaptiveQuiz({ questions, onComplete, onCancel }: AdaptiveQuizPr
     }
   };
 
-  // Screen 1: Clean Consent Screen
+  // Screen 1: Clean Consent Screen with Shuffling Controls
   if (!hasConsented) {
     return (
       <div className="mx-auto max-w-xl">
-        <div className="rounded-lg border bg-card p-6 sm:p-8 space-y-6">
-          <div className="flex items-center gap-3">
-            <span className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <ShieldCheck className="size-5" />
-            </span>
-            <div>
-              <h1 className="text-xl font-bold">Diagnostic Check</h1>
-              <p className="text-xs text-muted-foreground">Database Management Systems</p>
+        <div className="rounded-xl border bg-card p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <ShieldCheck className="size-5" />
+              </span>
+              <div>
+                <h1 className="text-xl font-bold">Adaptive Diagnostic Quiz</h1>
+                <p className="text-xs text-muted-foreground">Database Management Systems</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold border border-emerald-500/20">
+              <Layers className="size-3.5" />
+              <span>{totalBankCount} Questions In Bank</span>
             </div>
           </div>
 
           <p className="text-sm text-muted-foreground leading-relaxed">
-            This quick 5-question check identifies your strengths and flags missing prerequisite foundations.
+            Every quiz session automatically draws a fresh, shuffled set of questions across all 18 DBMS curriculum concepts so you never repeat the same test.
           </p>
 
+          {/* Quiz Length Selector */}
+          {onQuestionCountChange && (
+            <div className="rounded-lg border bg-muted/20 p-3.5 space-y-2">
+              <div className="flex items-center justify-between text-xs">
+                <span className="font-semibold text-foreground">Session Quiz Length:</span>
+                <span className="text-muted-foreground">{questions.length} questions selected</span>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {[5, 8, 12].map(n => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => onQuestionCountChange(n)}
+                    className={cn(
+                      'py-1.5 px-3 rounded-md text-xs font-medium border transition-all text-center',
+                      questionCount === n
+                        ? 'border-primary bg-primary text-primary-foreground shadow-sm font-semibold'
+                        : 'border-border bg-card text-muted-foreground hover:bg-muted'
+                    )}
+                  >
+                    {n} Questions {n === 8 ? '(Balanced)' : n === 5 ? '(Quick)' : '(In-depth)'}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="rounded-md border bg-muted/30 p-4 space-y-2 text-xs">
-            <p className="font-semibold text-foreground">How it works:</p>
-            <div className="space-y-1.5 text-muted-foreground">
-              <p>• One question at a time with optional confidence rating</p>
-              <p>• Traces incorrect answers to root foundational concepts</p>
-              <p>• Builds your custom study roadmap immediately after completion</p>
+            <p className="font-semibold text-foreground flex items-center gap-1.5">
+              <Sparkles className="size-3.5 text-primary" />
+              Smart Shuffling & Diagnostic Rules:
+            </p>
+            <div className="space-y-1 text-muted-foreground">
+              <p>• Randomly stratifies across foundational, intermediate, and advanced tiers</p>
+              <p>• Prioritizes questions you have not answered recently</p>
+              <p>• Shuffles question choices so you test concepts, not answer letters</p>
+              <p>• Bayesian NetworkX engine traces distractors directly to root knowledge gaps</p>
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-2">
-            <Button variant="ghost" size="sm" onClick={onCancel} className="text-muted-foreground">
-              Back to Dashboard
-            </Button>
-            <Button onClick={() => setHasConsented(true)}>
-              Start Diagnostic
+          <div className="flex items-center justify-between pt-2 gap-3">
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" onClick={onCancel} className="text-muted-foreground">
+                Back to Dashboard
+              </Button>
+              {onReshuffle && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={onReshuffle}
+                  className="flex items-center gap-1.5 text-xs"
+                  title="Reshuffle for a completely new set of questions"
+                >
+                  <Shuffle className="size-3.5" />
+                  <span>Reshuffle</span>
+                </Button>
+              )}
+            </div>
+            <Button onClick={() => setHasConsented(true)} className="px-5">
+              Start Quiz
               <ArrowRight className="ml-2 size-4" />
             </Button>
           </div>
@@ -142,21 +234,28 @@ export function AdaptiveQuiz({ questions, onComplete, onCancel }: AdaptiveQuizPr
     );
   }
 
-  // Screen 2: Clean Quiz Interface
+  // Screen 2: Clean Quiz Interface with Concept and Shuffled Presentation
   return (
     <div className="mx-auto max-w-2xl space-y-5">
       {/* Quiz Header */}
       <div className="flex items-center justify-between">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Question {currentIndex + 1} of {questions.length}
-          </span>
-          <h2 className="text-lg font-bold">
-            {currentQuestion?.concept ? `Topic ${currentQuestion.concept}` : 'Diagnostic Question'}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Question {currentIndex + 1} of {questions.length}
+            </span>
+            <span className="text-muted-foreground/40">•</span>
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-medium bg-primary/10 text-primary border border-primary/20">
+              <BookOpen className="size-3" />
+              {currentQuestion.concept}: {conceptName}
+            </span>
+          </div>
+          <h2 className="text-base sm:text-lg font-bold mt-1">
+            {conceptName}
           </h2>
         </div>
         <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1 font-mono">
+          <span className="flex items-center gap-1 font-mono bg-muted/50 px-2.5 py-1 rounded-md border">
             <Timer className="size-3.5 text-primary" />
             {Math.floor(elapsedSeconds / 60)}:
             {(elapsedSeconds % 60).toString().padStart(2, '0')}
@@ -173,8 +272,8 @@ export function AdaptiveQuiz({ questions, onComplete, onCancel }: AdaptiveQuizPr
       </div>
 
       {/* Question Card */}
-      <div className="rounded-lg border bg-card p-6 shadow-sm space-y-6">
-        <h3 className="text-base font-semibold leading-relaxed">
+      <div className="rounded-xl border bg-card p-6 shadow-sm space-y-6">
+        <h3 className="text-base font-semibold leading-relaxed text-foreground">
           {currentQuestion.prompt}
         </h3>
 

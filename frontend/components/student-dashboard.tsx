@@ -78,19 +78,17 @@ export function StudentDashboard({
             Database Management Systems · {totalConcepts} concepts
           </p>
         </div>
-        <Button onClick={onStartQuiz} className="sm:self-start">
-          {hasGaps || masteryCount > 0 ? (
-            <>
-              <RotateCcw className="mr-2 size-4" />
-              Retake Diagnostic Quiz
-            </>
-          ) : (
-            <>
-              <Target className="mr-2 size-4" />
-              Take Diagnostic Quiz
-            </>
-          )}
-        </Button>
+        {hasGaps || masteryCount > 0 ? (
+          <Button onClick={onViewDiagnosis} className="sm:self-start">
+            <Network className="mr-2 size-4" />
+            View Diagnostic Report
+          </Button>
+        ) : (
+          <Button onClick={onStartQuiz} className="sm:self-start">
+            <Target className="mr-2 size-4" />
+            Take Diagnostic Quiz
+          </Button>
+        )}
       </div>
 
       {/* Minimal Stat Strip */}
@@ -139,10 +137,6 @@ export function StudentDashboard({
                 <RotateCcw className="mr-2 size-4" />
                 Retest Concepts
               </Button>
-              <Button variant="outline" onClick={onStartQuiz} className="w-full sm:w-auto">
-                <Target className="mr-2 size-4" />
-                Retake Quiz
-              </Button>
             </>
           ) : gapCount === 0 && masteryCount > 0 ? (
             <>
@@ -154,10 +148,6 @@ export function StudentDashboard({
               <Button variant="outline" onClick={onViewDiagnosis} className="w-full sm:w-auto">
                 <Network className="mr-2 size-4" />
                 View Concept Graph
-              </Button>
-              <Button variant="outline" onClick={onStartQuiz} className="w-full sm:w-auto">
-                <RotateCcw className="mr-2 size-4" />
-                Retake Quiz
               </Button>
             </>
           ) : (

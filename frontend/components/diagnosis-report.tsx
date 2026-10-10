@@ -5,12 +5,14 @@ import { Concept, StudentMastery, ResponseRecord } from '@/lib/types';
 import { fetchConcepts } from '@/lib/apiClient';
 import { ConceptGraph } from './concept-graph';
 import { EvidenceDrawer } from './evidence-drawer';
+import { WrongQuestionsReview } from './wrong-questions-review';
 import { Button } from '@/components/ui/button';
 import {
   AlertTriangle,
   CheckCircle2,
   HelpCircle,
-  RotateCcw
+  Layers,
+  ArrowRight
 } from 'lucide-react';
 
 interface DiagnosisReportProps {
@@ -19,7 +21,6 @@ interface DiagnosisReportProps {
   rootGapId: string;
   onGoToRoadmap?: () => void;
   onRetest: () => void;
-  onRetakeQuiz?: () => void;
   isDark: boolean;
   concepts?: Concept[];
 }
@@ -30,7 +31,6 @@ export function DiagnosisReport({
   rootGapId,
   onGoToRoadmap,
   onRetest,
-  onRetakeQuiz,
   isDark,
   concepts: initialConcepts
 }: DiagnosisReportProps) {
@@ -83,30 +83,49 @@ export function DiagnosisReport({
         </div>
       </div>
 
-      {/* Action Bar: Retake & Retest */}
+      {/* Action Bar (Retake removed, focused on learning prerequisites & retesting) */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border bg-card p-3.5 sm:p-4 shadow-xs">
         <div>
-          <h2 className="text-sm font-bold">Concept Diagnostic Actions</h2>
+          <h2 className="text-sm font-bold">Diagnostic Findings &amp; Next Steps</h2>
           <p className="text-xs text-muted-foreground mt-0.5">
-            {rootGapId ? `Root blocker isolated at ${rootGapId}. Retest to verify mastery or retake the diagnostic quiz.` : 'Explore the prerequisite graph below or retake the quiz anytime.'}
+            {rootGapId
+              ? `Root blocker isolated at ${rootGapId}. Review the prerequisite gaps below, study the material, and verify with a retest.`
+              : 'Review your performance and prerequisite requirements below.'}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          {onRetakeQuiz && (
-            <Button variant="outline" size="sm" onClick={onRetakeQuiz} className="text-xs gap-1.5 w-full sm:w-auto">
-              <RotateCcw className="size-3.5" />
-              Retake Quiz
+          {onGoToRoadmap && (
+            <Button variant="outline" size="sm" onClick={onGoToRoadmap} className="text-xs gap-1.5 w-full sm:w-auto">
+              <Layers className="size-3.5 text-primary" />
+              View Study Roadmap
             </Button>
           )}
           <Button size="sm" onClick={onRetest} className="text-xs gap-1.5 w-full sm:w-auto">
             <CheckCircle2 className="size-3.5" />
-            Take Retest
+            Take Verification Retest
           </Button>
         </div>
       </div>
 
+      {/* Prominent Incorrect Questions & Prerequisites Analysis */}
+      <WrongQuestionsReview
+        responses={responses}
+        concepts={concepts}
+        masteryMap={masteryMap}
+        onSelectConcept={c => setSelectedConcept(c)}
+        onGoToRoadmap={onGoToRoadmap}
+      />
+
       {/* Interactive Concept Graph Canvas */}
-      <div className="rounded-xl border bg-card p-4 shadow-xs">
+      <div className="rounded-xl border bg-card p-4 shadow-xs space-y-2">
+        <div className="flex items-center justify-between pb-1">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            Prerequisite Knowledge Graph
+          </h3>
+          <span className="text-[11px] text-muted-foreground">
+            Click any concept node to inspect evidence and prerequisite dependencies
+          </span>
+        </div>
         <ConceptGraph
           masteryMap={masteryMap}
           selectedConceptId={selectedConcept?.id || null}

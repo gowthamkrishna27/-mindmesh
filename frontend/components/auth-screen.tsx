@@ -24,12 +24,8 @@ export function AuthScreen({
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   const [role, setRole] = useState<'student' | 'educator'>(initialRole);
   const [name, setName] = useState('');
-  const [email, setEmail] = useState(
-    initialRole === 'educator' ? 'aris.thorne@mindmesh.edu' : 'alex.chen@mindmesh.edu'
-  );
-  const [password, setPassword] = useState(
-    initialRole === 'educator' ? 'faculty123' : 'student123'
-  );
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,7 +36,7 @@ export function AuthScreen({
       const roleParam = params.get('role');
       const callbackParam = params.get('callbackUrl');
       if (initialRole === 'educator' || roleParam === 'educator' || callbackParam?.includes('educator')) {
-        handleRoleChange('educator');
+        setRole('educator');
       }
     }
   }, [initialRole]);
@@ -48,23 +44,6 @@ export function AuthScreen({
   const handleRoleChange = (newRole: 'student' | 'educator') => {
     setRole(newRole);
     setError(null);
-    if (mode === 'signin') {
-      if (newRole === 'educator') {
-        setEmail('aris.thorne@mindmesh.edu');
-        setPassword('faculty123');
-      } else {
-        setEmail('alex.chen@mindmesh.edu');
-        setPassword('student123');
-      }
-    } else {
-      if (newRole === 'educator') {
-        setName('Dr. Aris Thorne');
-        setEmail('aris.thorne@mindmesh.edu');
-      } else {
-        setName('Alex Chen');
-        setEmail('alex.chen@mindmesh.edu');
-      }
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -93,6 +72,7 @@ export function AuthScreen({
           localStorage.setItem('mindmesh_role', userRole);
           localStorage.setItem('mindmesh_user', finalName);
           localStorage.setItem('mindmesh_user_id', user.id);
+          localStorage.setItem('mindmesh_email', user.email || email);
           localStorage.setItem('mindmesh_logged_in', 'true');
         }
 
@@ -129,6 +109,7 @@ export function AuthScreen({
           localStorage.setItem('mindmesh_role', userRole);
           localStorage.setItem('mindmesh_user', user.name);
           localStorage.setItem('mindmesh_user_id', user.id);
+          localStorage.setItem('mindmesh_email', user.email || email);
           localStorage.setItem('mindmesh_logged_in', 'true');
         }
 

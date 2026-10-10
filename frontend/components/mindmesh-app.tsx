@@ -33,6 +33,7 @@ import { StudentDashboard } from './student-dashboard';
 import { AdaptiveQuiz } from './adaptive-quiz';
 import { DiagnosisReport } from './diagnosis-report';
 import { RetestReport } from './retest-report';
+import { selectAdaptiveQuizQuestions } from '@/lib/quizSelection';
 import { EducatorDashboard } from './educator-dashboard';
 import { AuthScreen } from './auth-screen';
 import { ProfileModal } from './profile-modal';
@@ -58,7 +59,9 @@ export function MindmeshApp() {
 
   useEffect(() => {
     fetchQuestions('A').then(qs => {
-      if (qs && qs.length > 0) setDiagnosticQuestions(qs.slice(0, 5));
+      if (qs && qs.length > 0) {
+        setDiagnosticQuestions(selectAdaptiveQuizQuestions(qs, { count: 8, shuffleOptions: true }));
+      }
     });
   }, []);
 
@@ -307,7 +310,7 @@ export function MindmeshApp() {
               responses={responses}
               rootGapId={rootGapId}
               onRetest={() => setView('retest')}
-              onRetakeQuiz={() => setView('quiz')}
+              onGoToRoadmap={() => setView('dashboard')}
               isDark={dark}
             />
           )}

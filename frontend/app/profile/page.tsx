@@ -63,7 +63,9 @@ export default function ProfilePage() {
     .join('')
     .toUpperCase() || 'MM';
 
-  const email = role === 'student' ? 'alex.chen@mindmesh.edu' : 'aris.thorne@mindmesh.edu';
+  const email =
+    (typeof window !== 'undefined' ? localStorage.getItem('mindmesh_email') : null) ||
+    (role === 'student' ? 'student@mindmesh.edu' : 'educator@mindmesh.edu');
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6 sm:p-8 max-w-xl mx-auto space-y-6">

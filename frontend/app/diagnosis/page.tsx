@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { DiagnosisReport } from '@/components/diagnosis-report';
 import { AppNavBar } from '@/components/app-nav-bar';
 import { StudentMastery, ResponseRecord } from '@/lib/types';
-import { fetchStudentMastery } from '@/lib/apiClient';
+import { fetchStudentMastery, fetchQuizResponses } from '@/lib/apiClient';
 
 export default function DiagnosisPage() {
   const router = useRouter();
@@ -23,6 +23,20 @@ export default function DiagnosisPage() {
       localStorage.removeItem('mindmesh_latest_diagnosis');
       const savedUserId = localStorage.getItem('mindmesh_user_id') || 'usr_alex_chen';
 
+      // 1. Try reading the latest quiz responses from session/local storage
+      try {
+        const stored = localStorage.getItem('mindmesh_latest_quiz_responses');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setResponses(parsed);
+          }
+        }
+      } catch {
+        // Fallback to DB
+      }
+
+      // 2. Fetch student mastery from DB
       fetchStudentMastery(savedUserId).then(m => {
         if (m && Object.keys(m).length > 0) {
           setMasteryMap(m);
@@ -38,6 +52,13 @@ export default function DiagnosisPage() {
           setRootGapId('');
         }
       });
+
+      // 3. If responses still empty, load from database
+      fetchQuizResponses(savedUserId).then(dbResponses => {
+        if (dbResponses && dbResponses.length > 0) {
+          setResponses(prev => (prev.length > 0 ? prev : dbResponses));
+        }
+      });
     }
   }, [router]);
 
@@ -50,7 +71,7 @@ export default function DiagnosisPage() {
           responses={responses}
           rootGapId={rootGapId}
           onRetest={() => router.push('/retest')}
-          onRetakeQuiz={() => router.push('/quiz')}
+          onGoToRoadmap={() => router.push('/dashboard')}
           isDark={false}
         />
       </div>
